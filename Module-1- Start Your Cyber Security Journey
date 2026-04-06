@@ -1,0 +1,52 @@
+# Offensive Security Intro Lab
+
+## Task 1: Offensive Security Basics
+**Scenario:** Offensive Security is about thinking like an attacker to find weaknesses before real hackers do.  
+**Question:** Which term describes simulating a hacker's actions to find system vulnerabilities?  
+**Answer:** Offensive Security  
+
+---
+
+## Task 2: Starting the Lab
+**Scenario:** A fake banking application called *FakeBank* is launched in a virtual desktop environment.  
+**Question:** What is the bank account number shown in the FakeBank application?  
+**Answer:** [Write the account number here]  
+
+---
+
+## Task 3: Find Hidden Page
+**Scenario:** Using the terminal and the `dirb` command to discover hidden pages.  
+**Command:**  
+**Discovered URLs:**  
+- http://fakebank.thm/images  
+- http://fakebank.thm/[hidden-page]  
+
+**Question:** What is the other hidden URL?  
+**Answer:** [Write the hidden URL here]  
+
+---
+
+## Task 4: Attack the Admin Page
+**Scenario:** Navigating to the hidden admin panel `/bank-transfer` to deposit money.  
+**Action:** Deposit $2000 into account number 8881.  
+**Result:** A flag with green text appears.  
+**Question:** Enter the green words as the answer (ALL CAPS).  
+**Answer:** [Write the flag here]  
+
+---
+
+## Tools Used
+- TryHackMe platform  
+- Virtual desktop environment  
+- Dirb (directory brute force tool)  
+- Web browser  
+
+## Findings
+- Hidden admin panel discovered.  
+- Vulnerability in FakeBank application.  
+- Ability to manipulate account balance.  
+
+## Mitigation
+- Restrict access to hidden admin pages.  
+- Implement stronger authentication.  
+- Regular vulnerability scanning.  
