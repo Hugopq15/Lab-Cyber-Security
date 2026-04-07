@@ -1,11 +1,12 @@
+# Room 2 Defensive Security Intro
 
-# Task 1: Think like a Defender
+## Task 1: Think like a Defender
 Scenario: A security analyst sits at a desk with multiple monitors showing maps, charts, and cybersecurity dashboards.
 Concept: Defensive security is about protecting and securing systems. Analysts focus on detecting and investigating attacks, and responding before damage occurs. Unlike offensive security, defenders do not attack systems — they monitor and protect them.
 
 ---
 
-# Task 2: Detect Suspicious Activity
+## Task 2: Detect Suspicious Activity
 Scenario: Joe, an apprentice SOC analyst, is on his first solo shift. His monitoring dashboard has lit up with alerts.
 Steps:
 
@@ -18,7 +19,7 @@ Objective: Learn how SOC analysts distinguish normal activity from suspicious be
 
 ---
 
-# Task 3: Identify the Attack
+## Task 3: Identify the Attack
 Scenario: Joe has spotted suspicious activity. Now he must determine what the attacker is trying to do.
 Steps:
 
@@ -31,7 +32,7 @@ Objective: Practice analyzing logs to understand the attacker’s intent.
 
 ---
 
-# Task 4: Stop the Attack
+## Task 4: Stop the Attack
 Scenario: Joe knows the attacker’s IP and their activity. The priority now is containment.
 Steps:
 
