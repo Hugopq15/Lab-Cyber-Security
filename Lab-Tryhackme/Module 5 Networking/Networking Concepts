@@ -1,1 +1,184 @@
 # Room 14 Networking Concepts
+
+## Task 1 Introduction
+
+- Importance of IP addresses for Internet access.
+- Question of whether an IP can uniquely identify a user.
+- Concept of the life of a packet.
+- First room in the networking series:
+- Networking Concepts
+- Networking Essentials
+- Networking Core Protocols
+- Networking Secure Protocols
+
+---
+
+## Task 2 OSI Model
+
+OSI model: conceptual framework for network communications.
+Seven layers:
+- Layer 1: Physical (medium, signals, cables, WiFi).
+- Layer 2: Data Link (Ethernet, WiFi, MAC).
+- Layer 3: Network (IP, ICMP, routing).
+- Layer 4: Transport (TCP, UDP).
+- Layer 5: Session (NFS, RPC).
+- Layer 6: Presentation (encoding, compression, encryption).
+- Layer 7: Application (HTTP, FTP, DNS, SMTP, IMAP).
+Mnemonic: “Please Do Not Throw Spinach Pizza Away.”
+Summary table with functions and protocols.
+
+---
+
+## Task 3 TCP/IP Model
+
+Developed by DoD in the 1970s, resilient design.
+Layers:
+Layer Number | ISO OSI Model   | TCP/IP Model (RFC 1122) |	Protocols
+7	           |Application Layer|	Application Layer      |	HTTP, HTTPS, FTP, POP3, SMTP, IMAP, Telnet, SSH,
+6	           |Presentation Layer
+5	           |Session Layer
+4	           |Transport Layer	 |Transport Layer	         | TCP, UDP
+3	           |Network Layer	   |Internet Layer	         | IP, ICMP, IPSec
+2	           |Data Link Layer	 |Link Layer	             |Ethernet 802.3, WiFi 802.11
+1            |	Physical Layer		
+Sometimes shown as 5 layers (adding Physical).
+Prepares for study of IP, TCP, UDP.
+
+---
+
+## Task 4 IP Addresses and Subnets
+
+IPv4: 32 bits, 4 octets (0–255).
+Reserved addresses:
+Network (e.g., 192.168.1.0).
+Broadcast (e.g., 192.168.1.255).
+Commands:
+Windows: ipconfig.(P address on the MS Windows command line using the command)
+Linux/Unix: ifconfig, ip a s.
+Example: Host IP 192.168.66.89, subnet mask 255.255.255.0 (/24).(/24 means that the leftmost 24 bits within the IP address do not change across the network)
+Private IP ranges (RFC 1918):
+- 10.0.0.0 – 10.255.255.255
+- 172.16.0.0 – 172.31.255.255
+- 192.168.0.0 – 192.168.255.255
+- NAT allows private IPs to access the public Internet.
+Routers forward packets at layer 3.
+- Routing
+A router is like your local post office; you hand them the mail parcel, and they would know how to deliver it. 
+In technical terms, a router forwards data packets to the proper network. Usually, a data packet passes through multiple routers before it reaches its final destination. 
+The router functions at layer 3, inspecting the IP address and forwarding the packet to the best network (router) so the packet gets closer to its destination.
+
+---
+
+## Task 5 UDP and TCP
+
+UDP:
+- Connectionless, no delivery confirmation.
+- Uses port numbers (1–65535).
+- Analogy: standard mail without confirmation.
+- Advantage: speed.
+TCP:
+- Connection-oriented, reliable delivery.
+- User sequence numbers and acknowledgements.
+- Three-way handshake: SYN → SYN-ACK → ACK.
+- Uses port numbers (1–65535).
+
+---
+
+## Task 6 Encapsulation
+
+Each layer adds header/trailer:
+- Application → Transport (segment/datagram).
+- Transport → Network (IP packet).
+- Network → Data Link (frame).
+- Reverse process extracts data.
+Life of a Packet:
+- Browser sends HTTP request via HTTPS.
+- TCP establishes connection.
+- IP adds source/destination addresses.
+- Link layer sends to router.
+- Routers forward until destination.
+- Reverse process at server.
+
+---
+
+## Task 7 Telnet
+
+TELNET protocol: remote terminal connection.
+Demonstrated services:
+On the target virtual machine, different services are running. We will experiment with three of them:
+- Echo server: This server echoes everything you send it. By default, it listens on port 7.
+- Daytime server: This server listens on port 13 by default and replies with the current day and time.
+- Web (HTTP) server: This server listens on TCP port 80 by default and serves web pages.
+- Echo server (port 7).
+user@TryHackMe$ telnet MACHINE_IP 7
+telnet MACHINE_IP 7
+Trying MACHINE_IP...
+Connected to MACHINE_IP.
+Escape character is '^]'.
+Hi
+Hi
+How are you?
+How are you?
+Bye
+Bye
+^]
+
+telnet> quit
+Connection closed.
+
+Daytime server (port 13).
+user@TryHackMe$ telnet MACHINE_IP 13
+Trying MACHINE_IP...
+Connected to MACHINE_IP.
+Escape character is '^]'.
+Thu Jun 20 12:36:32 PM UTC 2024
+Connection closed by foreign host.
+
+Web server (port 80).
+user@TryHackMe$ telnet MACHINE_IP 80
+Trying MACHINE_IP...
+Connected to MACHINE_IP.
+Escape character is '^]'.
+GET / HTTP/1.1
+Host: telnet.thm
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+[...]
+
+Connection closed by foreign host.
+
+---
+
+## Tools Used
+
+- Protocols: IP, TCP, UDP, ICMP, HTTP, HTTPS, TELNET.
+- Commands: ipconfig, ifconfig, ip a s, telnet.
+- Devices: routers, switches, servers.
+- Standards: Ethernet (802.3), WiFi (802.11).
+
+## Findings
+
+- OSI vs TCP/IP: theory vs practice.
+- IP addressing and subnetting are foundational.
+- UDP is fast but unreliable; TCP is reliable.
+- Encapsulation ensures modular communication.
+- Telnet demonstrates direct TCP interaction.
+
+## Mitigation / Best Practices
+
+- Memorize private IP ranges.
+- Use secure alternatives to telnet (SSH).
+- Apply NAT with proper firewall rules.
+- Monitor broadcast traffic and logs.
+- Secure routing protocols.
+
+## Conclusion
+
+- Networking Concepts room built the foundation:
+- OSI and TCP/IP models.
+- IP addressing and subnetting.
+- UDP vs TCP.
+- Encapsulation and packet flow.
+- Telnet demonstrations.
+- Essential preparation for Networking Essentials and advanced protocols/security.
