@@ -1,1 +1,173 @@
 # Room 15 Networking Core Protocols
+
+## Task 1 Introduction
+
+- This room is the third in the networking series:
+- Networking Concepts
+- Networking Essentials
+- Networking Core Protocols (this room)
+- Networking Secure Protocols
+- Prerequisites: OSI model, TCP/IP model, Ethernet, IP, TCP.
+- Objectives: WHOIS, DNS, HTTP/HTTPS, FTP, SMTP, POP3, IMAP.
+- Setup: Start the AttackBox and VM to practice interactively.
+
+---
+
+## Task 2 DNS: Remembering Addresses
+
+- DNS maps domain names to IP addresses.
+- Layer: Application Layer (OSI Layer 7).
+- Ports: UDP 53 (default), TCP 53 (fallback).
+Record types:
+- A: Hostname → IPv4.
+- AAAA: Hostname → IPv6.
+- CNAME: Domain → another domain.
+- MX: Mail server for a domain.
+Example:
+- Code
+nslookup www.example.com
+Address: 93.184.215.14 (IPv4)
+Address: 2606:2800:21f:cb07:6820:80da:af6b:8b2c (IPv6)
+Wireshark/tshark capture: Shows queries for A and AAAA records, responses with IPs.
+
+---
+
+## Task 3 WHOIS
+
+- WHOIS provides domain registration info.
+- Registrants can set DNS records.
+- WHOIS records include: domain name, registrar, creation/expiration dates, registrant details.
+- Privacy services can mask personal info.
+Example:
+- Code
+whois example.com
+Registrar: GoDaddy.com
+Creation Date: 1993-04-02
+Expiration Date: 2026-10-20
+Registrant: Registration Private (Domains By Proxy)
+
+---
+
+## Task 4 HTTP(S): Accessing the Web
+
+- Purpose: Defines browser-server communication.
+- Ports: HTTP (80), HTTPS (443).
+- Methods: GET, POST, PUT, DELETE.
+Example:
+- Browser requests page from MACHINE_IP.
+- Server responds with HTML.
+- Wireshark analysis: Shows client requests (red) and server responses (blue), including metadata like server version and last modified date.
+- Manual testing with telnet:
+- Connect to port 80.
+- Send GET / HTTP/1.1 and Host: anything.
+- Server responds with page.
+- Can request specific files (GET /file.html).
+
+---
+
+Task 5 FTP: Transferring Files
+
+- Purpose: Efficient file transfer.
+- Port: TCP 21 (control), separate connection for data.
+- Commands: USER, PASS, RETR, STOR.
+Example session:
+- Code
+ftp MACHINE_IP
+USER anonymous
+PASS
+ls → LIST
+get coffee.txt
+quit
+- Wireshark analysis: Shows client commands vs server responses. Directory listing and file transfers use separate connections.
+- Exercise: Retrieve flag.txt using FTP client.
+
+---
+
+## Task 6 SMTP: Sending Email
+
+- Purpose: Defines how mail clients and servers exchange emails.
+- Port: TCP 25.
+- Commands: HELO/EHLO, MAIL FROM, RCPT TO, DATA, . (end message), QUIT.
+Example session (telnet):
+- Code
+HELO client.thm
+MAIL FROM: <user@client.thm>
+RCPT TO: <strategos@server.thm>
+DATA
+Subject: Telnet email
+Hello. I am using telnet to send you an email!
+.
+QUIT
+- Wireshark analysis: Shows SMTP dialogue step by step.
+
+---
+
+## Task 7 POP3: Receiving Email
+
+- Purpose: Retrieve emails from server to client.
+- Port: TCP 110.
+- Commands: USER, PASS, STAT, LIST, RETR, DELE, QUIT.
+Example session (telnet):
+- Code
+telnet MACHINE_IP 110
+USER strategos
+PASS
+STAT → 3 messages
+LIST → shows sizes
+RETR 3 → retrieves message
+QUIT
+- Observation: POP3 downloads and deletes messages, like checking a mailbox.
+- Security note: Traffic (including passwords) visible in Wireshark captures.
+- Credentials for practice: Username: linda, Password: Pa$$123.
+- Task 8 IMAP: Synchronizing Email
+- Purpose: Synchronize emails across multiple devices.
+- Port: TCP 143.
+- Commands: LOGIN, SELECT, FETCH, MOVE, COPY, LOGOUT.
+Example session (telnet):
+- Code
+telnet MACHINE_IP 143
+LOGIN strategos
+SELECT inbox
+FETCH 3 body[]
+LOGOUT
+- Observation: IMAP keeps emails on server, synchronizes read/moved/deleted status across clients.
+- Wireshark analysis: Shows client commands (red) and long server responses (blue).
+Comparison:
+- POP3: Downloads/deletes, minimal server storage.
+- IMAP: Synchronizes, uses more server storage.
+
+---
+
+## Tools Used
+
+- Protocols: DNS, WHOIS, HTTP, HTTPS, FTP, SMTP, POP3, IMAP.
+- Commands: nslookup, whois, telnet, ftp, ls, get, HELO, MAIL FROM, RCPT TO, DATA, USER, PASS, RETR, LOGIN, FETCH.
+- Applications: Firefox browser, FTP client, email client.
+- Ports: DNS (53), HTTP (80), HTTPS (443), FTP (21), SMTP (25), POP3 (110), IMAP (143).
+
+## Findings
+
+- DNS resolves names to IPs, enabling web and email communication.
+- WHOIS provides transparency into domain ownership.
+- HTTP/HTTPS enable web browsing, with methods for data exchange.
+- FTP is optimized for file transfer, using separate control/data connections.
+- SMTP defines structured communication for sending emails.
+- POP3 retrieves and deletes emails, while IMAP synchronizes across devices.
+- Wireshark reveals hidden metadata and raw protocol exchanges.
+
+## Mitigation / Best Practices
+
+- Use DNSSEC to secure DNS queries.
+- Protect WHOIS privacy with registrar services.
+- Always prefer HTTPS over HTTP.
+- Use SFTP/FTPS instead of plain FTP.
+- Configure SMTP with authentication and TLS.
+- Avoid plain POP3/IMAP; use encrypted versions (POP3S, IMAPS).
+- Monitor protocol traffic with Wireshark for anomalies.
+
+## Conclusion
+
+- Networking Core Protocols introduces the practical protocols powering the Internet.
+- Learned how DNS resolves names, WHOIS reveals domain ownership, HTTP/HTTPS enable web access, FTP transfers files, SMTP sends emails, POP3 retrieves emails, and IMAP synchronizes mailboxes.
+- These protocols form the backbone of Internet communication.
+- Understanding them prepares you for the final room: Networking Secure Protocols, focusing on security.
