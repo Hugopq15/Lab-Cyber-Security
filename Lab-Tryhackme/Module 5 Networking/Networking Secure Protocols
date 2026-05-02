@@ -1,1 +1,126 @@
 # Room 17 Networking Secure Protocols
+
+## Task 1 Introduction
+
+- Los protocolos básicos como HTTP y SMTP no garantizan confidencialidad, integridad ni autenticidad.
+- TLS añade seguridad a protocolos existentes (HTTPS, POP3S, SMTPS, IMAPS).
+- SSH reemplaza TELNET para acceso remoto seguro.
+- VPN permite crear redes privadas sobre Internet.
+- Objetivos: comprender SSL/TLS, asegurar protocolos en texto plano, usar SSH y VPN.
+
+---
+
+## Task 2 TLS
+
+- SSL (1995) evolucionó a TLS (1999). TLS 1.3 (2018) es la versión actual.
+- TLS opera en la capa de transporte, garantizando confidencialidad e integridad.
+- Protocolos asegurados: HTTPS, DoT, MQTTS, SIPS.
+- Certificados digitales emitidos por CA; alternativa gratuita: Let’s Encrypt.
+- Los certificados autofirmados no garantizan autenticidad.
+
+---
+
+## Task 3 HTTPS
+
+- HTTP usa puerto 80 y transmite en texto plano.
+- HTTPS = HTTP sobre TLS (puerto 443).
+- Flujo: TCP handshake → sesión TLS → comunicación HTTP cifrada.
+- En Wireshark, los datos aparecen como Application Data.
+- Con clave privada, se puede descifrar tráfico.
+- TLS ofreció seguridad a HTTP sin cambios en capas inferiores o superiores.
+
+---
+
+## Task 4 SMTPS, POP3S, IMAPS
+
+- Igual que HTTPS, los protocolos de correo se aseguran con TLS.
+- Puertos seguros: SMTP (465/587), POP3 (995), IMAP (993).
+- TLS puede añadirse a muchos otros protocolos con beneficios similares.
+Protocol	Default Port Number
+HTTP	     80
+SMTP	     25
+POP3	     110
+IMAP	     143
+The secure versions, i.e., over TLS, use the following TCP port numbers by default:
+
+Protocol	Default Port Number
+HTTPS	    443
+SMTPS	    465 and 587
+POP3S	    995
+IMAPS	    993
+
+---
+
+T## ask 5 SSH
+
+- TELNET (puerto 23) enviaba credenciales en texto plano.
+- SSH creado en 1995, SSH-2 en 1996, OpenSSH en 1999.
+- Beneficios: autenticación segura, confidencialidad, integridad, túneles, X11 Forwarding.
+- Uso básico: ssh usuario@hostname (puerto 22).
+
+---
+
+## Task 6 SFTP y FTPS
+
+- SFTP: parte de SSH, puerto 22.
+- FTPS: FTP sobre TLS, puerto 990.
+- Diferencia: SFTP depende de SSH, FTPS de TLS.
+- SFTP ofrece simplicidad y seguridad; FTPS requiere certificados y configuración más compleja.
+
+---
+
+## Task 7 VPN
+
+- VPN crea una red privada sobre Internet.
+- Permite conectar sucursales o usuarios remotos.
+- Características: cifrado, ocultar IP pública, sortear restricciones.
+- Riesgos: fugas de DNS/IP, legalidad en algunos países.
+
+---
+
+## Task 8 Closing Notes
+
+- Tres enfoques principales para asegurar tráfico de red:
+- TLS: asegura protocolos existentes.
+- SSH: acceso remoto seguro y túneles.
+- VPN: redes privadas sobre Internet.
+
+---
+
+## Challenge
+
+- Configurar navegador para registrar claves TLS (--ssl-key-log-file=~/ssl-key.log).
+- Captura de tráfico (randy-chromium.pcapng).
+- En Wireshark, cargar archivo de claves para descifrar tráfico TLS y observar credenciales.
+
+## Tools Used
+
+- Protocolos: TLS, SSL, HTTPS, SMTPS, POP3S, IMAPS, SSH, SFTP, FTPS, VPN.
+- Comandos: ssh, sftp, Wireshark.
+- Infraestructura: certificados digitales, OpenSSH, servidores VPN.
+
+## Findings
+
+- TLS asegura protocolos de aplicación sin alterar TCP/IP.
+- HTTPS protege la web y protocolos de correo.
+- SSH reemplazó TELNET, ofreciendo cifrado y autenticación robusta.
+- SFTP y FTPS permiten transferencias seguras de archivos.
+- VPNs proporcionan privacidad y acceso remoto seguro.
+
+## Mitigation / Best Practices
+
+- Usar TLS 1.3 en todos los servicios críticos.
+- Configurar HTTPS en todos los servicios web.
+- Obtener certificados de CA reconocidas.
+- Configurar SSH con llaves públicas y deshabilitar TELNET.
+- Preferir SFTP sobre FTPS por simplicidad y seguridad.
+- Configurar VPNs para evitar fugas de DNS/IP y cumplir con regulaciones locales.
+
+## Conclusion
+
+- Networking Secure Protocols completa la serie de fundamentos de redes.
+  Aprendimos cómo TLS, SSH y VPN garantizan confidencialidad, integridad y autenticidad.
+- Estos protocolos son la base de la seguridad moderna en Internet.
+- Con ellos, pasamos de redes funcionales pero inseguras a comunicaciones confiables y protegidas.
+
+
