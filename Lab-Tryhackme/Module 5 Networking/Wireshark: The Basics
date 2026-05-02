@@ -1,1 +1,106 @@
 # Room 18 Wireshark: The Basics
+
+## Task 1 Introduction
+
+- Wireshark is an open-source, cross-platform packet analyzer.
+- It captures live traffic and inspects PCAP files.
+- Learning Objectives: navigate and configure Wireshark, inspect packets across TCP/IP layers, apply display filters.
+- Prerequisites: basic networking knowledge.
+- Environment: VM with http1.pcapng and Exercise.pcapng.
+
+---
+
+## Task 2 Tool Overview
+
+- Use Cases: troubleshoot network issues, detect anomalies, study protocols.
+- Note: Wireshark is not an IDS; it only analyzes packets.
+- GUI Sections: toolbar, display filter bar, recent files, capture interfaces, status bar.
+Features:
+- Load PCAP files.
+- Three panes: packet list, packet details, packet bytes.
+- Packet coloring (temporary and permanent rules).
+- Live sniffing (start/stop/restart).
+- Merge PCAP files.
+- View file properties (hash, capture time, stats).
+
+---
+
+## Task 3 Packet Dissection
+
+- Packet dissection = protocol breakdown using OSI layers.
+- Example HTTP packet shows 7 layers:
+- Frame (Layer 1) → physical info.
+- Source MAC (Layer 2) → MAC addresses.
+- Source IP (Layer 3) → IPv4 addresses.
+- Protocol (Layer 4) → TCP/UDP ports.
+- Protocol Errors → TCP reassembly.
+- Application Protocol (Layer 5) → HTTP, FTP, SMB.
+- Application Data → application-specific content.
+- Clicking details highlights corresponding bytes.
+
+---
+
+## Task 4 Packet Navigation
+
+- Packet Numbers: each packet gets a unique ID.
+- Go to Packet: jump directly to a packet or conversation.
+- Find Packets: search by content (filters, hex, string, regex).
+- Mark Packets: highlight packets of interest (lost after closing file).
+- Packet Comments: persistent notes inside capture files.
+- Export Packets: save only relevant packets.
+- Export Objects: extract transferred files (HTTP, SMB, TFTP).
+- Time Display Format: change from “seconds since capture” to UTC.
+- Expert Info: highlights anomalies with severity (Chat, Note, Warn, Error).
+
+---
+
+## Task 5 Packet Filtering
+
+Two filter types:
+- Capture filters: applied during capture.
+- Display filters: applied during viewing.
+- Apply as Filter: right-click a field to filter.
+- -Conversation Filter: show all packets in a conversation.
+- Colourise Conversation: highlight related packets without filtering.
+- Prepare as Filter: create but don’t apply immediately.
+- Apply as Column: add fields as columns in packet list.
+- Follow Stream: reconstruct application-level traffic (TCP/UDP/HTTP).
+Simple Queries:
+- By protocol: http, arp, dhcp, ftp, smtp, pop, imap.
+- By port: tcp.port == 80.
+- By IP: ip.addr == 192.168.1.2.
+
+---
+
+## Tools Used
+
+- Wireshark, capture/display filters, coloring rules, export functions.
+- PCAP files: http1.pcapng, Exercise.pcapng.
+- Features: sniffing, merging PCAPs, file properties, conversation filters, stream following.
+
+## Findings
+
+- Wireshark enables deep traffic analysis across OSI layers.
+- Navigation and filtering streamline large captures.
+- Marking, commenting, and exporting improve collaboration.
+- Expert Info provides anomaly hints but requires analyst validation.
+
+## Mitigation / Best Practices
+
+- Use capture filters to reduce noise.
+- Apply permanent coloring rules for critical events.
+- Document findings with persistent comments.
+- Export only relevant traffic for focused analysis.
+- Validate Expert Info before acting.
+- Set time format to UTC for accurate correlation.
+
+## Conclusion
+
+- Covered Wireshark basics: what it is, how it works, and how to analyze captures.
+- Learned GUI navigation, packet dissection, navigation tools, marking, exporting, and filtering.
+- Wireshark is essential for network troubleshooting and security analysis.
+- Next step: Wireshark: Packet Operations for deeper packet investigation.
+- Wireshark: The Basics introduces the most widely used packet analysis tool.
+- Mastering its interface, filters, and navigation is the foundation for advanced analysis.
+- Wireshark is indispensable for detecting issues, studying protocols, and investigating anomalies.
+- This knowledge prepares analysts for deeper exploration in advanced Wireshark modules.
