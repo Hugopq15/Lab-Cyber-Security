@@ -1,1 +1,119 @@
 # Room 19 Tcpdump: The Basics
+
+## Task 1 Introduction
+
+- Studying networking protocols is challenging because protocol “conversations” are hidden behind user interfaces.
+- Tcpdump allows capturing and inspecting traffic directly.
+- Tcpdump and its libpcap library were written in C/C++ in the late 1980s/1990s for Unix-like systems.
+- Libpcap is the foundation for many other tools and was ported to Windows as Winpcap.
+- Learning Objectives
+- Capture packets and save them to a file.
+- Set filters on captured packets.
+- Control how captured packets are displayed.
+- Prerequisites
+- Familiarity with TCP/IP model and protocols.
+- Prior rooms: Networking Concepts, Networking Essentials, Networking Core Protocols, Networking Secure Protocols.
+
+---
+
+## Task 2 Basic Packet Capture
+
+- Specify Interface: -i INTERFACE (e.g., -i eth0, -i any).
+- Save Packets: -w FILE saves to .pcap.
+- Read Packets: -r FILE reads from saved capture.
+- Limit Count: -c COUNT captures a fixed number.
+- Disable Resolution: -n disables DNS lookups, -nn disables DNS + port resolution.
+- Verbose Output: -v, -vv, -vvv increase detail.
+Examples
+- tcpdump -i eth0 -c 50 -v → capture 50 packets on eth0, verbose.
+- tcpdump -i wlo1 -w data.pcap → capture on WiFi, save to file.
+- tcpdump -i any -nn → capture all interfaces, no resolution.
+
+---
+
+## Task 3 Filtering Expressions
+
+- Filters allow focusing on relevant traffic.
+By Host:
+- tcpdump host example.com -w http.pcap → capture traffic with example.com.
+- src host / dst host limit to source/destination.
+By Port:
+- tcpdump port 53 → capture DNS traffic.
+- src port / dst port limit to source/destination port.
+By Protocol:
+- tcpdump icmp → capture ICMP packets (ping, traceroute).
+- Other options: ip, ip6, tcp, udp.
+- Logical Operators:
+- and, or, not combine conditions.
+Example: tcpdump host 1.1.1.1 and tcp.
+- Offline Analysis:
+- tcpdump -r traffic.pcap src host 192.168.124.1 -n | wc → count packets from source IP.
+
+---
+
+## Task 4 Advanced Filtering
+
+- Advanced filters allow precise selection.
+- Length Filters:
+- greater LENGTH → packets ≥ length.
+- less LENGTH → packets ≤ length.
+Binary Operations:
+- & (AND), | (OR), ! (NOT).
+- Header Bytes:
+- Syntax: proto[expr:size].
+Example: ether[0] & 1 != 0 → multicast packets.
+Example: ip[0] & 0xf != 5 → IP packets with options.
+- TCP Flags Filtering:
+- tcp[tcpflags] == tcp-syn → only SYN.
+- tcp[tcpflags] & tcp-syn != 0 → packets with SYN set.
+- tcp[tcpflags] & (tcp-syn|tcp-ack) != 0 → SYN or ACK set.
+
+---
+
+## Task 5 Displaying Packets
+
+Tcpdump offers options to customize output:
+- -q: quick output, brief info.
+- -e: include MAC addresses.
+- -A: ASCII output (text/plain).
+- -xx: hexadecimal output.
+- -X: hex + ASCII combined.
+Examples:
+- tcpdump -q → short lines.
+- tcpdump -e → shows MAC addresses.
+- tcpdump -A → ASCII text.
+- tcpdump -xx → hex dump.
+- tcpdump -X → hex + ASCII.
+
+---
+
+## Tools Used
+
+- Tcpdump with options (-i, -w, -r, -c, -n, -v, -q, -e, -A, -xx, -X).
+- Libpcap library.
+- Wireshark/Tshark for complementary analysis.
+
+## Findings
+
+- Tcpdump provides lightweight, fast packet capture.
+- Filters (host, port, protocol, flags) allow precise targeting.
+- Display options adapt output to analysis needs.
+- Offline analysis with .pcap files enhances flexibility.
+
+## Mitigation / Best Practices
+
+- Always specify interface to avoid missing traffic.
+- Save captures for later analysis.
+- Use filters to reduce noise.
+- Disable resolution (-nn) for performance.
+- Apply verbose output when deeper inspection is needed.
+- Use ASCII/hex display depending on traffic type.
+
+## Conclusion
+
+- Tcpdump Basics (Tasks 1–6) covers capturing, filtering, and displaying packets.
+- Mastering these fundamentals is essential for troubleshooting, protocol study, and security investigations.
+- Tcpdump complements GUI tools like Wireshark, offering command-line precision and efficiency.
+- Tcpdump is a powerful tool for capturing, filtering, and displaying packets.
+- Alongside Wireshark and Tshark, it is essential for protocol analysis.
+- Even at an introductory level, Tcpdump demonstrates its ability to handle large volumes of traffic efficiently.
