@@ -1,1 +1,201 @@
 # Room 20 Nmap: The Basics
+
+## Task 1 Introduction
+
+- Scenario: Connected to a network, using resources like email and web browsing. Two main questions arise:
+- How to discover other live devices on the network?
+- How to identify services running on those devices (e.g., SSH, web servers)?
+- Manual methods: ping, arp-scan, telnet → inefficient and limited.
+- Problem: Large networks → thousands of addresses and ports.
+- Solution: Nmap, an open-source network scanner (since 1997), powerful and flexible.
+- Learning objectives:
+- Discover live hosts.
+- Identify services on hosts.
+- Differentiate port scan types.
+- Detect service versions.
+- Control timing.
+- Format output.
+- Prerequisites: TCP/IP model, protocols, networking basics.
+
+---
+
+## Task 2 Host Discovery: Who Is Online
+
+- Goal: Find live hosts on a network.
+- Target specification methods:
+- IP range: 192.168.0.1-10
+- Subnet: 192.168.0.1/24
+- Hostname: example.thm
+- Ping scan (-sn): More advanced than simple ping.
+- Local network scan:
+Example: nmap -sn 192.168.66.0/24
+- Shows hosts up with latency and MAC addresses.
+- Uses ARP requests to confirm hosts.
+- Remote network scan:
+Example: nmap -sn 192.168.11.0/24
+- Cannot use ARP; relies on ICMP echo, timestamp, TCP SYN/ACK.
+- Shows hosts up even across routers.
+Advanced options:
+- -PS[ports] → TCP SYN discovery.
+- -PA[ports] → TCP ACK discovery.
+- -PU[ports] → UDP discovery.
+- List scan (-sL): Lists targets without scanning.
+- Takeaway: -sn is useful for host discovery with minimal noise, but does not reveal services.
+
+---
+
+## Task 3 Port Scanning: Who Is Listening
+
+- Goal: Identify services listening on TCP/UDP ports.
+- Ports: 65,535 for TCP and UDP.
+- TCP connect Scan (-sT):
+- Completes full handshake.
+- Reliable but more visible in logs.
+- TCP SYN Scan (-sS):
+- Sends SYN only, does not complete handshake.
+- Stealthier, fewer logs.
+- UDP Scan (-sU):
+- For services like DNS, DHCP, NTP, SNMP, VoIP.
+- Responses often ICMP “port unreachable.”
+Port range options:
+- Default: 1000 common ports.
+- -F: Fast mode (100 ports).
+- -p[range]: Specific range.
+- -p-: All ports (1–65535).
+- -p1-1023: Well-known ports.
+Summary of options
+- Option	Explanation
+- -sT	TCP connect scan – full handshake
+- -sS	TCP SYN scan – stealthy
+- -sU	UDP scan
+- -F	Fast mode – 100 common ports
+- -p[range]	Specify port range; -p- scans all
+
+---
+
+## Task 4 Version Detection: Extract More Information
+
+- OS Detection (-O):
+- Uses indicators to guess OS.
+Example: Detects Linux kernel version range.
+- Service and Version Detection (-sV):
+- Identifies exact service version.
+Example: SSH → OpenSSH 8.9p1 Ubuntu.
+-Aggressive Scan (-A):
+- Combines OS detection, version detection, traceroute.
+Force scan (-Pn):
+- Treats all hosts as online, even if they don’t respond to ICMP.
+- Summary of options
+Option	Explanation
+- -O	OS detection
+- -sV	Service and version detection
+- -A	OS + version + traceroute
+- -Pn	Scan hosts marked as down
+
+---
+
+## Task 5 Timing: How Fast is Fast
+
+- Timing templates (-T0 to -T5):
+- Paranoid (0), Sneaky (1), Polite (2), Normal (3), Aggressive (4), Insane (5).
+Example durations for 100 ports:
+- T0 → 9.8 hours
+- T1 → 27.5 minutes
+- T2 → 40.5 seconds
+- T3 → 0.15 seconds
+- T4 → 0.13 seconds
+Parallelism:
+- --min-parallelism / --max-parallelism → control probes simultaneously.
+Rate control:
+- --min-rate / --max-rate → packets per second.
+Host timeout:
+- --host-timeout <time> → max wait per host.
+
+---
+
+## Task 6 Output: Controlling What You See
+
+- Verbosity (-v):
+- Shows more details during scan.
+- Levels: -v, -vv, -vvvv, or -v2, -v4.
+- Debugging (-d):
+- Detailed debugging output.
+- Levels: -d up to -d9.
+Saving results:
+- -oN <file> → Normal output.
+- -oX <file> → XML output.
+- -oG <file> → Grepable output.
+- -oA <basename> → All formats at once.
+
+---
+
+## Task 7 Conclusion and Summary
+
+Learned how to:
+- Discover live hosts.
+- Perform port scans.
+- Detect service versions.
+- Control timing.
+- Save results in multiple formats.
+Privileges matter:
+- Running Nmap with sudo unlocks full features (e.g., SYN scan).
+- Without sudo, limited to connect scan.
+- Nmap is feature-rich; this room covered essentials.
+- - In the Network Security module, four rooms are dedicated solely to Nmap.
+Review Table of Options
+Category	Option	Explanation
+List Scan	-sL	List targets without scanning
+- Host Discovery	-sn	Ping scan – host discovery only
+- Port Scanning	-sT	TCP connect scan – full handshake
+- -sS	TCP SYN – stealthy
+- -sU	UDP scan
+- -F	Fast mode – 100 ports
+- -p[range]	Specify port range; -p- all ports
+- -Pn	Treat all hosts as online
+Service Detection	-O	OS detection
+- -sV	Service version detection
+- -A	OS + version + traceroute
+Timing	-T0-5	Timing templates
+- --min-parallelism / --max-parallelism	Parallel probes
+- --min-rate / --max-rate	Rate control
+- --host-timeout	Max wait per host
+- Real-time Output	-v	Verbosity levels
+- -d	Debugging levels
+Report	-oN	Normal output
+- -oX	XML output
+- -oG	Grepable output
+- -oA	All formats
+
+
+## Tools Used
+
+- Tool: Nmap.
+- Commands: -sL, -sn, -sT, -sS, -sU, -F, -p, -Pn, -O, -sV, -A, -T0-5, --min-parallelism, --max-parallelism, --min-rate, --max-rate, --host-timeout, -v, -d, -oN, -oX, -oG, -oA.
+- Protocols: TCP, UDP, ICMP.
+- Auxiliary software: Wireshark for traffic analysis.
+
+## Findings
+
+- Nmap efficiently discovers hosts and services.
+- Privileges (sudo) are crucial for advanced scans.
+- Timing templates and parallelism/rate control adjust speed and stealth.
+- Verbosity and debugging provide transparency.
+- Saving results in multiple formats supports analysis and automation.
+
+## Mitigation / Best Practices
+
+- Always run Nmap with proper privileges (sudo) to unlock full scanning capabilities.
+- Use moderate timing templates (-T2 or -T3) to balance speed and stealth.
+- Limit scans to authorized environments; avoid scanning external networks without permission.
+- Save results in multiple formats (-oA) for flexibility in later analysis.
+- Start with well-known ports (-p1-1023) before scanning all ports to reduce noise.
+- Use verbosity (-v) for learning and debugging, but avoid excessive debugging (-d9) unless necessary.
+- Monitor network performance when adjusting parallelism and rate options to prevent packet loss.
+- Document findings and validate with additional tools (e.g., Wireshark) for accuracy.
+
+## Final Conclusion
+
+- This room demonstrated how Nmap discovers hosts, scans ports, detects services, controls timing, and manages output.
+- Running with root privileges is essential for full functionality.
+- Nmap is a versatile and powerful tool, foundational for network administration and security.
+- Mastering these basics prepares you for advanced Nmap features explored in the dedicated Network Security module.
