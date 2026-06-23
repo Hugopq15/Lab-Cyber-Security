@@ -1,39 +1,27 @@
 # Room 21 Cryptography Basics
 
-Task 1 Introduction
+## Task 1 Introduction
+
 Cryptography prevents third parties from reading or altering messages.
-
 Enables secure channels between apps/browsers and servers.
-
 Secure communication = confidentiality, integrity, authenticity.
-
 Cryptography lays the foundation for trust in digital communication.
-
 This room is the first of three:
-
 Cryptography Basics
-
 Public Key Cryptography Basics
-
 Hashing Basics
-
 Prerequisites: basic Linux command line usage.
-
 Learning Objectives:
-
 Key terms in cryptography
-
 Importance of cryptography
-
 Caesar Cipher
-
 Symmetric ciphers
-
 Asymmetric ciphers
-
 Basic mathematics in cryptography
 
-Task 2 Importance of Cryptography
+---
+
+## Task 2 Importance of Cryptography
 Purpose: ensure secure communication in presence of adversaries.
 
 Secure = confidentiality + integrity + authenticity.
