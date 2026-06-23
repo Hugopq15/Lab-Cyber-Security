@@ -12,6 +12,8 @@ This module is the second of three:
 - Hashing Basics
 - Learning Objectives: RSA, Diffie-Hellman, SSH, SSL/TLS Certificates, PGP/GPG.
 
+---
+
 ## Task 2 Common Use of Asymmetric Encryption
 
 Main use: secure key exchange for symmetric encryption.
@@ -21,6 +23,8 @@ Secret code → symmetric cipher + key.
 Lock → public key.
 Lock’s key → private key.
 Real world: digital signatures and certificates ensure identity verification.
+
+---
 
 ## Task 3 RSA
 
@@ -37,6 +41,8 @@ Real-world RSA uses primes with 300+ digits.
 CTFs: variables p, q, n, e, d, m, c.
 Tools: RsaCtfTool, rsatool.
 
+---
+
 ## Task 4 Diffie-Hellman Key Exchange
 
 Establishes a shared secret without transmitting the key directly.
@@ -49,6 +55,8 @@ Shared secret: g^(ab) mod p.
 - Example: p = 29, g = 3, a = 13, b = 15 → shared secret = 10.
 Real implementations use very large primes.
 Often combined with RSA for authentication and signatures.
+
+---
 
 ## Task 5 SSH
 
@@ -66,6 +74,8 @@ Permissions must be strict (chmod 600).
 authorized_keys contains allowed public keys.
 In CTFs, adding a key to authorized_keys can serve as a backdoor.
 
+---
+
 ## Task 6 Digital Signatures and Certificates
 
 - Digital Signatures
@@ -77,6 +87,8 @@ Used in HTTPS to prove server identity.
 Based on chain of trust: Root CA → Intermediate CA → Site certificate.
 Browsers trust certificates if chain is valid.
 TLS certificates: paid or free via Let’s Encrypt.
+
+---
 
 ## Task 7 PGP and GPG
 
