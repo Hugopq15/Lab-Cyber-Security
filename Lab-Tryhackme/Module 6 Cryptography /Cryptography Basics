@@ -7,213 +7,149 @@ Enables secure channels between apps/browsers and servers.
 Secure communication = confidentiality, integrity, authenticity.
 Cryptography lays the foundation for trust in digital communication.
 This room is the first of three:
-Cryptography Basics
-Public Key Cryptography Basics
-Hashing Basics
-Prerequisites: basic Linux command line usage.
+- Cryptography Basics
+- Public Key Cryptography Basics
+- Hashing Basics
+- Prerequisites: basic Linux command line usage.
 Learning Objectives:
-Key terms in cryptography
-Importance of cryptography
-Caesar Cipher
-Symmetric ciphers
-Asymmetric ciphers
-Basic mathematics in cryptography
+- Key terms in cryptography
+- Importance of cryptography
+- Caesar Cipher
+- Symmetric ciphers
+- Asymmetric ciphers
+- Basic mathematics in cryptography
 
 ---
 
 ## Task 2 Importance of Cryptography
+
 Purpose: ensure secure communication in presence of adversaries.
-
 Secure = confidentiality + integrity + authenticity.
-
 Cryptography protects data at rest and in motion.
-
 Daily use cases:
-
 Login credentials encrypted (e.g., TryHackMe).
-
 SSH tunnels prevent eavesdropping.
-
 Online banking validates server certificates.
-
 File downloads verified via hash functions.
-
 Compliance examples:
-
 PCI DSS for credit card data.
-
 HIPAA, HITECH (USA), GDPR (EU), DPA (UK) for medical records.
-
 Conclusion: cryptography is essential, often hidden from direct user interaction.
 
-Task 3 Plaintext to Ciphertext
+---
+
+## Task 3 Plaintext to Ciphertext
+
 Plaintext: readable message/data before encryption.
-
 Ciphertext: scrambled, unreadable output after encryption.
-
 Cipher: algorithm to convert plaintext ↔ ciphertext.
-
 Key: secret string of bits used by cipher.
-
 Encryption: plaintext → ciphertext using cipher + key.
-
 Decryption: ciphertext → plaintext using cipher + key.
-
 Without the key, recovering plaintext is infeasible.
 
-Task 4 Historical Ciphers
+---
+
+## Task 4 Historical Ciphers
+
 Cryptography dates back to ancient Egypt (~1900 BCE).
-
 Caesar Cipher (1st century BCE): shift letters by fixed number.
-
 Example:
-
 Plaintext: TRYHACKME
-
 Key: 3 → Ciphertext: WUBKDFNPH
-
 Decryption: shift back by 3.
-
 Only 25 possible keys → insecure today.
-
 Vulnerable to brute force attacks.
-
 Other historical ciphers:
-
 Vigenère cipher (16th century).
-
 Enigma machine (WWII).
-
 One-time pad (Cold War).
-
 Tools: Cryptii website for experimenting with Caesar shifts.
 
-Task 5 Types of Encryption
+---
+
+## Task 5 Types of Encryption
+
 Symmetric Encryption
 Same key for encryption and decryption.
-
 Challenge: secure key distribution.
-
 Examples:
-
-DES (56-bit, broken in 1999).
-
-3DES (168-bit, deprecated in 2019).
-
-AES (128/192/256-bit, current standard).
-
+- DES (56-bit, broken in 1999).
+- 3DES (168-bit, deprecated in 2019).
+- AES (128/192/256-bit, current standard).
 Asymmetric Encryption
 Uses public key (encrypt) + private key (decrypt).
-
 Examples: RSA, Diffie-Hellman, ECC.
-
-RSA: 2048-bit minimum, up to 4096-bit.
-
-ECC: shorter keys with equivalent security (256-bit ECC ≈ 3072-bit RSA).
-
+- RSA: 2048-bit minimum, up to 4096-bit.
+- ECC: shorter keys with equivalent security (256-bit ECC ≈ 3072-bit RSA).
 Based on one-way mathematical problems (easy forward, infeasible reverse).
-
 Public key shared openly; private key kept secret.
-
 Summary of New Terms:
-
 Alice & Bob: fictional parties in cryptography examples.
+- Symmetric encryption: same key for both processes.
+- Asymmetric encryption: public/private key pair.
 
-Symmetric encryption: same key for both processes.
+---
 
-Asymmetric encryption: public/private key pair.
+## Task 6 Basic Math
 
-Task 6 Basic Math
 XOR Operation
 Exclusive OR compares bits:
-
-0 ⊕ 0 = 0
-
-0 ⊕ 1 = 1
-
-1 ⊕ 0 = 1
-
-1 ⊕ 1 = 0
-
+- 0 ⊕ 0 = 0
+- 0 ⊕ 1 = 1
+- 1 ⊕ 0 = 1
+- 1 ⊕ 1 = 0
 Example: 1010 ⊕ 1100 = 0110.
-
 Properties:
-
-A ⊕ A = 0
-
-A ⊕ 0 = A
-
+- A ⊕ A = 0
+- A ⊕ 0 = A
 Commutative & associative.
-
 Use in cryptography:
-
 Ciphertext = Plaintext ⊕ Key
-
 Decryption: Ciphertext ⊕ Key = Plaintext
-
 Modulo Operation
 Definition: remainder of division.
-
 Examples:
-
-25 % 5 = 0
-
-23 % 6 = 5
-
-23 % 7 = 2
-
+- 25 % 5 = 0
+- 23 % 6 = 5
+- 23 % 7 = 2
 Properties:
-
 Result always between 0 and n−1.
-
 Not reversible (x % 5 = 4 → infinite solutions).
-
 Used in cryptography for large number operations (RSA, Diffie-Hellman).
 
-Tools Used
+---
+
+## Tools Used
+
 Symmetric ciphers: DES, 3DES, AES.
-
 Asymmetric ciphers: RSA, Diffie-Hellman, ECC.
-
 Mathematical operations: XOR, modulo.
-
 Platforms: SSH, HTTPS, PCI DSS compliance, medical data standards.
 
-Findings
-Cryptography ensures confidentiality, integrity, authenticity.
+## Findings
 
-Plaintext → Ciphertext process introduces key terms.
+- Cryptography ensures confidentiality, integrity, authenticity.
+- Plaintext → Ciphertext process introduces key terms.
+- Historical ciphers illustrate evolution but are insecure today.
+- Symmetric encryption is fast but requires secure key sharing.
+- Asymmetric encryption solves distribution but is slower.
+- XOR and modulo are fundamental math operations in cryptography.
 
-Historical ciphers illustrate evolution but are insecure today.
+## Mitigation / Best Practices
 
-Symmetric encryption is fast but requires secure key sharing.
+- Use AES for symmetric encryption; avoid DES/3DES.
+- Use RSA ≥ 2048-bit or ECC for asymmetric encryption.
+- Protect private keys rigorously.
+- Validate server certificates to avoid MITM attacks.
+- Use hashing to verify file integrity.
+- Follow compliance standards (PCI DSS, HIPAA, GDPR).
 
-Asymmetric encryption solves distribution but is slower.
+## Conclusion
 
-XOR and modulo are fundamental math operations in cryptography.
-
-Mitigation / Best Practices
-Use AES for symmetric encryption; avoid DES/3DES.
-
-Use RSA ≥ 2048-bit or ECC for asymmetric encryption.
-
-Protect private keys rigorously.
-
-Validate server certificates to avoid MITM attacks.
-
-Use hashing to verify file integrity.
-
-Follow compliance standards (PCI DSS, HIPAA, GDPR).
-
-Conclusion
-Covered basics: importance, key terms, plaintext/ciphertext, historical ciphers, symmetric vs asymmetric encryption, and math foundations.
-
-Learned how encryption/decryption works and why cryptography is vital.
-
-Historical methods (Caesar, Vigenère, Enigma) show evolution but are insecure today.
-
-Modern cryptography is indispensable for secure communication, compliance, and trust.
-
-Next steps: Public Key Cryptography Basics and Hashing Basics.
-
-Mastering fundamentals prepares analysts for advanced cryptographic applications.
+- Covered basics: importance, key terms, plaintext/ciphertext, historical ciphers, symmetric vs asymmetric encryption, and math foundations.
+- Learned how encryption/decryption works and why cryptography is vital.
+- Historical methods (Caesar, Vigenère, Enigma) show evolution but are insecure today.
+- Modern cryptography is indispensable for secure communication, compliance, and trust.
+- Next steps: Public Key Cryptography Basics and Hashing Basics.
+- Mastering fundamentals prepares analysts for advanced cryptographic applications.
