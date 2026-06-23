@@ -7,6 +7,8 @@
 - Recommended after completing: Cryptography Basics, Public Key Cryptography Basics, Hashing Basics.
 - Learning Objectives: crack Windows authentication hashes, /etc/shadow hashes, password-protected Zip/RAR files, and SSH keys.
 
+---
+
 ## Task 2 Basic Terms
 
 Hashes: fixed-length representation of data (e.g., MD5, SHA1, NTLM).
@@ -15,6 +17,8 @@ Security: hashing functions are one-way (easy to compute, infeasible to reverse)
 Rooted in P vs NP problem.
 Dictionary attacks: hash words from a wordlist, compare with target hash.
 John automates brute force and dictionary attacks.
+
+---
 
 ## Task 3 Setting Up Your System
 Environment: AttackBox or Lab Machine.
@@ -26,6 +30,8 @@ Windows: download binaries.
 Wordlists: /usr/share/wordlists or SecLists repository.
 RockYou wordlist: leaked passwords from 2009, widely used in cracking.
 
+---
+
 ## Task 4 Cracking Basic Hashes
 
 Syntax: john [options] [file path].
@@ -34,12 +40,16 @@ Identifying hashes: use tools like hash-identifier.
 Format-specific cracking: john --format=raw-md5 --wordlist=rockyou.txt hash.txt.
 List formats: john --list=formats.
 
+---
+
 ## Task 5 Cracking Windows Authentication Hashes
 
 NT Hash / NTLM: modern Windows password hash format.
 Stored in SAM database or NTDS.dit (Active Directory).
 Obtained via tools like Mimikatz.
 Cracking possible with weak policies; otherwise, use pass-the-hash attacks.
+
+---
 
 ## Task 6 Cracking /etc/shadow Hashes
 
@@ -50,6 +60,8 @@ Example: unshadow passwd shadow > unshadowed.txt.
 Crack with John:
 john --wordlist=rockyou.txt --format=sha512crypt unshadowed.txt.
 
+---
+
 ## Task 7 Cracking Zip Files
 
 Password-protected archives can be cracked.
@@ -58,6 +70,8 @@ Example:
 Code
 zip2john archive.zip > zip_hash.txt
 john --wordlist=rockyou.txt zip_hash.txt
+
+---
 
 ## Task 8 Cracking RAR Files
 
@@ -68,6 +82,8 @@ Code
 rar2john archive.rar > rar_hash.txt
 john --wordlist=rockyou.txt rar_hash.txt
 
+---
+
 ## Task 9 Advanced Cracking Techniques
 
 John supports incremental/brute force modes.
@@ -75,11 +91,15 @@ Can apply rules to mutate wordlist entries.
 Example: adding numbers/symbols to dictionary words.
 Useful when passwords are slightly modified versions of common words.
 
+---
+
 ## Task 10 Cracking Other File Types
 
 John supports many formats beyond Zip/RAR.
 Examples: PDF, Office documents, and more.
 Conversion tools included in Jumbo John suite.
+
+---
 
 ## Task 11 Cracking SSH Keys
 
@@ -90,6 +110,8 @@ Code
 ssh2john id_rsa > id_rsa_hash.txt
 john --wordlist=rockyou.txt id_rsa_hash.txt
 Common in CTFs and penetration testing.
+
+---
 
 ## Tools Used
 - John the Ripper (Jumbo John).
