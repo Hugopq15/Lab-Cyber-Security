@@ -1,1 +1,122 @@
 # Room 24 John the Ripper: The Basics
+
+## Task 1 Introduction
+
+- John the Ripper (John) is a versatile hash-cracking tool.
+- Combines fast cracking speed with wide hash type compatibility.
+- Recommended after completing: Cryptography Basics, Public Key Cryptography Basics, Hashing Basics.
+- Learning Objectives: crack Windows authentication hashes, /etc/shadow hashes, password-protected Zip/RAR files, and SSH keys.
+
+## Task 2 Basic Terms
+
+Hashes: fixed-length representation of data (e.g., MD5, SHA1, NTLM).
+Example: "polo" → MD5 = b53759f3ce692de7aff1b5779d3964da.
+Security: hashing functions are one-way (easy to compute, infeasible to reverse).
+Rooted in P vs NP problem.
+Dictionary attacks: hash words from a wordlist, compare with target hash.
+John automates brute force and dictionary attacks.
+
+## Task 3 Setting Up Your System
+Environment: AttackBox or Lab Machine.
+Tools: Jumbo John (extended version), RockYou wordlist.
+Installation:
+Pre-installed on AttackBox/Kali.
+Other Linux: sudo apt install john or build from source.
+Windows: download binaries.
+Wordlists: /usr/share/wordlists or SecLists repository.
+RockYou wordlist: leaked passwords from 2009, widely used in cracking.
+
+## Task 4 Cracking Basic Hashes
+
+Syntax: john [options] [file path].
+Automatic cracking: john --wordlist=rockyou.txt hash.txt.
+Identifying hashes: use tools like hash-identifier.
+Format-specific cracking: john --format=raw-md5 --wordlist=rockyou.txt hash.txt.
+List formats: john --list=formats.
+
+## Task 5 Cracking Windows Authentication Hashes
+
+NT Hash / NTLM: modern Windows password hash format.
+Stored in SAM database or NTDS.dit (Active Directory).
+Obtained via tools like Mimikatz.
+Cracking possible with weak policies; otherwise, use pass-the-hash attacks.
+
+## Task 6 Cracking /etc/shadow Hashes
+
+/etc/shadow: stores Linux password hashes.
+Requires root privileges.
+Unshadowing: combine /etc/passwd and /etc/shadow with unshadow.
+Example: unshadow passwd shadow > unshadowed.txt.
+Crack with John:
+john --wordlist=rockyou.txt --format=sha512crypt unshadowed.txt.
+
+## Task 7 Cracking Zip Files
+
+Password-protected archives can be cracked.
+Tool: zip2john converts Zip file into hash format.
+Example:
+Code
+zip2john archive.zip > zip_hash.txt
+john --wordlist=rockyou.txt zip_hash.txt
+
+## Task 8 Cracking RAR Files
+
+Similar to Zip cracking.
+Tool: rar2john converts RAR file into hash format.
+Example:
+Code
+rar2john archive.rar > rar_hash.txt
+john --wordlist=rockyou.txt rar_hash.txt
+
+## Task 9 Advanced Cracking Techniques
+
+John supports incremental/brute force modes.
+Can apply rules to mutate wordlist entries.
+Example: adding numbers/symbols to dictionary words.
+Useful when passwords are slightly modified versions of common words.
+
+## Task 10 Cracking Other File Types
+
+John supports many formats beyond Zip/RAR.
+Examples: PDF, Office documents, and more.
+Conversion tools included in Jumbo John suite.
+
+## Task 11 Cracking SSH Keys
+
+SSH private keys (id_rsa) often protected with passphrases.
+Tool: ssh2john converts private key into hash format.
+Example:
+Code
+ssh2john id_rsa > id_rsa_hash.txt
+john --wordlist=rockyou.txt id_rsa_hash.txt
+Common in CTFs and penetration testing.
+
+## Tools Used
+- John the Ripper (Jumbo John).
+- Conversion utilities: zip2john, rar2john, ssh2john, unshadow.
+- Wordlists: RockYou, SecLists.
+- External tools: hash-identifier.
+
+## Findings
+
+- John is highly versatile, supporting many hash formats.
+- Dictionary attacks are effective against weak passwords.
+- NTLM and /etc/shadow hashes are critical targets in Windows/Linux.
+- Conversion tools extend John’s capabilities to archives and SSH keys.
+- RockYou remains a powerful resource for practical cracking.
+
+## Mitigation / Best Practices
+
+- Enforce strong, unique passwords.
+- Use salted hashes to prevent dictionary/precomputed attacks.
+- Limit access to sensitive files (/etc/shadow, SAM, private keys).
+- Protect SSH keys with strong passphrases.
+- Monitor systems for unauthorized hash dumps.
+
+## Conclusion
+
+- John the Ripper: The Basics introduces one of the most powerful hash-cracking tools.
+- Covered: basic syntax, hash identification, Windows NTLM, Linux shadow files, Zip/RAR archives, SSH keys.
+- Demonstrated John’s versatility with conversion tools and dictionary attacks.
+- Emphasized importance of strong password policies and secure key management.
+- This knowledge prepares analysts for advanced cracking techniques and real-world penetration testing scenarios.
