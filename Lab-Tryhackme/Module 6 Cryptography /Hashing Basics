@@ -1,1 +1,136 @@
 # Room 23 Hashing Basics
+
+## Task 1 Introduction
+
+Scenario: verifying file integrity (e.g., downloaded file vs. original).
+Solution: compare hash values; identical hashes = identical files.
+Hash value: fixed-size string computed by a hash function.
+Hash function: input of arbitrary size → fixed-length digest.
+Prerequisites: Cryptography Basics, Public Key Cryptography Basics.
+Learning Objectives:
+- Hash functions and collisions.
+- Role of hashing in authentication.
+- Recognizing stored hash values.
+- Cracking hashes.
+- Hashing for integrity protection.
+
+---
+
+## Task 2 Hash Functions
+
+Definition: irreversible, one-way functions.
+Properties: fast to compute, infeasible to reverse, avalanche effect (tiny input change → large output change).
+Example:
+- File1: “T” → MD5, SHA1, SHA256 produce unique outputs.
+- File2: “U” → completely different outputs despite one-bit difference.
+Importance: used in password verification and file integrity.
+Collisions: inevitable due to pigeonhole principle (more inputs than outputs).
+Weak algorithms: MD5 and SHA1 broken by collision attacks → not recommended.
+
+---
+
+## Task 3 Insecure Password Storage
+
+Plaintext storage: RockYou breach exposed 14M passwords.
+Deprecated encryption: Adobe breach used outdated encryption + plaintext hints.
+Insecure hashing: LinkedIn breach (2012) used SHA-1 without salting.
+Consequence: millions of passwords cracked.
+
+---
+
+## Task 4 Secure Password Storage
+
+Secure hashing: store hash values instead of plaintext passwords.
+Problem: duplicate passwords → identical hashes → rainbow table attacks.
+Rainbow tables: precomputed hash-to-password lookup tables.
+Protection: add salt (random unique value) to each password before hashing.
+Algorithms like Bcrypt, Scrypt, Argon2, PBKDF2 handle salting automatically.
+Best practice example:
+- Choose secure algorithm (e.g., Argon2).
+- Generate unique salt.
+- Concatenate password + salt.
+- Hash combined string.
+- Store hash + salt.
+- Why not encryption? Requires storing a key; if compromised, all passwords exposed.
+
+---
+
+## Task 5 Recognising Password Hashes
+
+Goal: identify hash type to crack it.
+Tools: hashID, but context is critical.
+Linux hashes: stored in /etc/shadow. Format: $prefix$options$salt$hash.
+$y$ → yescrypt.
+$7$ → scrypt.
+$2b$, $2y$, $2a$, $2x$ → bcrypt.
+$6$ → sha512crypt.
+$1$ → md5crypt.
+Windows hashes: NTLM (variant of MD4), stored in SAM database.
+Context + research (e.g., Hashcat Example Hashes) essential for identification.
+
+---
+
+## Task 6 Password Cracking
+
+Hashes are not encrypted → cannot be decrypted.
+Cracking = hashing many inputs (dictionary/brute force) and comparing outputs.
+Salted hashes: require including salt in cracking process.
+Tools: Hashcat, John the Ripper.
+GPU cracking: GPUs accelerate hash computations; bcrypt resists GPU speedups.
+VMs: limited GPU access → slower cracking.
+Hashcat syntax:
+- Code
+hashcat -m <hash_type> -a <attack_mode> hashfile wordlist
+Example:
+- Code
+hashcat -m 3200 -a 0 hash.txt /usr/share/wordlists/rockyou.txt
+
+---
+
+## Task 7 Hashing for Integrity Checking
+
+File integrity: hashing verifies files haven’t been altered.
+Example: compare SHA256 checksum of downloaded ISO with official checksum.
+Duplicate detection: identical hashes = identical files.
+HMACs: Keyed-Hash Message Authentication Codes.
+Combine hash function + secret key.
+Provide authenticity (sender identity) + integrity (message unchanged).
+Formula:
+𝐻𝑀𝐴𝐶(𝐾,𝑀)=𝐻((𝐾⊕𝑜𝑝𝑎𝑑) ∣∣ 𝐻((𝐾⊕𝑖𝑝𝑎𝑑) ∣∣ 𝑀))
+
+---
+
+## Tools Used
+
+- Hash functions: MD5, SHA1, SHA256, SHA512.
+- Comands: md5sum, sha1sum, sha256sum.
+- Utilities: hashID, Hashcat, John the Ripper.
+- Wordlists: rockyou.txt.
+- HMAC implementations in cryptographic libraries.
+
+## Findings
+
+- Hashing is essential for password storage and file integrity.
+- Insecure practices (plaintext, weak algorithms) have led to massive breaches.
+- Rainbow tables exploit unsalted hashes; salting prevents this.
+- Recognizing hash types requires context and tools.
+- Cracking relies on brute force/dictionary attacks, accelerated by GPUs.
+- HMACs extend hashing to provide authenticity + integrity.
+
+## Mitigation / Best Practices
+
+- Never store passwords in plaintext.
+- Avoid MD5 and SHA1; use Argon2, Bcrypt, Scrypt, PBKDF2.
+- Always salt passwords uniquely.
+- Verify file integrity with SHA256 or stronger.
+- Use HMACs for secure message authentication.
+- Limit access to sensitive files (/etc/shadow, SAM).
+
+## Conclusion
+
+- Hashing Basics covers password storage, recognition, cracking, and integrity checking.
+- Demonstrated avalanche effect, collision risks, and weaknesses of MD5/SHA1.
+- Highlighted breaches (RockYou, Adobe, LinkedIn) as lessons in insecure storage.
+- Secure hashing with salts and strong algorithms is critical for authentication.
+- Hashing also ensures file integrity and authenticity via HMACs.
+
