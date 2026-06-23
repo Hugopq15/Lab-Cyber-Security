@@ -1,1 +1,132 @@
 # Room 22 Public Key Cryptography Basics
+
+## Task 1 Introduction
+
+Public key cryptography (asymmetric encryption) ensures authentication, authenticity, integrity, and confidentiality.
+Analogy: meeting a business partner → verify identity, confirm words, prevent tampering, maintain privacy.
+Digital communication requires the same assurances.
+Symmetric encryption = confidentiality; Asymmetric encryption = authentication, integrity, authenticity.
+This module is the second of three:
+- Cryptography Basics
+- Public Key Cryptography Basics
+- Hashing Basics
+- Learning Objectives: RSA, Diffie-Hellman, SSH, SSL/TLS Certificates, PGP/GPG.
+
+## Task 2 Common Use of Asymmetric Encryption
+
+Main use: secure key exchange for symmetric encryption.
+Asymmetric encryption is slower, so it is used only for negotiation.
+Lock analogy:
+Secret code → symmetric cipher + key.
+Lock → public key.
+Lock’s key → private key.
+Real world: digital signatures and certificates ensure identity verification.
+
+## Task 3 RSA
+
+RSA enables secure data transmission over insecure channels.
+Based on the difficulty of factoring large numbers.
+Simplified example:
+p = 157, q = 199 → n = 31243.
+ϕ(n) = 30888.
+e = 163, d = 379.
+- Public key = (31243,163).
+- Private key = (31243,379).
+Message x = 13 → ciphertext y = 16341 → decrypted back to 13.
+Real-world RSA uses primes with 300+ digits.
+CTFs: variables p, q, n, e, d, m, c.
+Tools: RsaCtfTool, rsatool.
+
+## Task 4 Diffie-Hellman Key Exchange
+
+Establishes a shared secret without transmitting the key directly.
+- Process:
+Public values: prime p, generator g.
+Alice chooses a, Bob chooses b.
+Alice: A = g^a mod p. Bob: B = g^b mod p.
+Exchange A and B.
+Shared secret: g^(ab) mod p.
+- Example: p = 29, g = 3, a = 13, b = 15 → shared secret = 10.
+Real implementations use very large primes.
+Often combined with RSA for authentication and signatures.
+
+## Task 5 SSH
+
+- Server Authentication
+SSH client checks server’s public key fingerprint.
+Prevents man-in-the-middle attacks.
+Once accepted, stored in known_hosts.
+- Client Authentication
+Methods: username/password (less secure) or SSH keys.
+Keys generated with ssh-keygen (RSA, DSA, ECDSA, Ed25519).
+Example: ssh-keygen -t ed25519.
+Private key must remain secret; can be protected with passphrase.
+Permissions must be strict (chmod 600).
+- Security Context
+authorized_keys contains allowed public keys.
+In CTFs, adding a key to authorized_keys can serve as a backdoor.
+
+## Task 6 Digital Signatures and Certificates
+
+- Digital Signatures
+Ensure authenticity and integrity of documents/messages.
+Created with private key, verified with public key.
+Secure method: sign a hash of the document.
+- Certificates
+Used in HTTPS to prove server identity.
+Based on chain of trust: Root CA → Intermediate CA → Site certificate.
+Browsers trust certificates if chain is valid.
+TLS certificates: paid or free via Let’s Encrypt.
+
+## Task 7 PGP and GPG
+
+- PGP (Pretty Good Privacy): software for encryption and signing.
+- GPG (GNU Privacy Guard): open-source implementation of OpenPGP.
+Commonly used in secure email communication.
+- Key Generation
+Command: gpg --full-gen-key.
+Options: RSA, DSA, ECC (default = ECC Curve25519).
+Provide user info (name, email).
+Output: public key (shared), private key (kept secret).
+- Practical Use
+Contacts encrypt with your public key.
+You decrypt with your private key.
+Backup keys securely; import with gpg --import backup.key.
+Decrypt with gpg --decrypt confidential_message.gpg.
+- Security
+Private keys can be protected with passphrases.
+Tools like John the Ripper + gpg2john can attack weak passphrases.
+
+---
+
+## Tools Used
+
+- RSA, Diffie-Hellman, SSH, SSL/TLS, PGP/GPG.
+- Mathematical operations: factorization, modulo, exponentiation.
+- Certificates and chains of trust.
+
+## Findings
+
+- Asymmetric cryptography secures identity, integrity, and key distribution.
+- RSA: secure due to factoring difficulty.
+- Diffie-Hellman: shared secret without direct transmission.
+- SSH: practical use of public/private keys.
+- Digital signatures and certificates: ensure authenticity and trust.
+- PGP/GPG: practical secure communication in email.
+
+## Mitigation / Best Practices
+
+- Use RSA ≥ 2048 bits or ECC.
+- Protect private keys with strong passphrases.
+- Verify fingerprints and certificates before trusting.
+- Use Let’s Encrypt or trusted CAs for HTTPS.
+- Keep secure backups of GPG keys.
+- Monitor authorized_keys for unauthorized entries.
+
+## Conclusion
+
+- Public Key Cryptography Basics demonstrates how asymmetric cryptography ensures identity, integrity, and trust.
+- RSA and Diffie-Hellman form the mathematical foundation.
+- SSH, certificates, and PGP/GPG are real-world applications.
+- Symmetric + asymmetric hybrid models are essential for modern secure communication.
+- This knowledge prepares for the next module: Hashing Basics, focusing on integrity and verification.
