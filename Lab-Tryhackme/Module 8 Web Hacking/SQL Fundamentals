@@ -1,1 +1,145 @@
 # Room 32 SQL Fundamentals 
+
+## Task 1 Introduction
+
+Objective: Understand the importance of databases in cybersecurity.
+Databases are everywhere: web apps, SOC tools, SIEMs, authentication systems, malware analysis, threat detection.
+Offensive use: Exploiting SQL vulnerabilities (e.g., SQL injection).
+Defensive use: Navigating databases to detect suspicious activity and enforce restrictions.
+Learning Goals:
+- What databases are and key concepts.
+- Types of databases.
+- SQL basics.
+- CRUD operations, clauses, operators, functions.
+- Prerequisites: Beginner‑friendly, Linux Fundamentals helpful.
+
+---
+
+## Task 2 Databases 101
+
+Objective: Introduce databases and their types.
+Definition: Organized collections of structured information, easily accessible and manipulable.
+Examples: Authentication data, social media content, streaming history.
+Types:
+- Relational (SQL): Structured tables with rows/columns, relationships between tables.
+- Non‑Relational (NoSQL): Flexible formats (documents, key‑value pairs).
+Tables, Rows, Columns:
+- Columns define attributes and data types.
+- Rows represent records (e.g., Book with id=1, name, publication_date).
+Keys:
+- Primary Key: Unique identifier (e.g., id).
+- Foreign Key: Links tables (e.g., author_id in Books referencing Authors table).
+
+---
+
+## Task 3 SQL
+
+Objective: Learn what SQL is and how to use it.
+SQL (Structured Query Language): Used to query, define, and manipulate relational database data.
+DBMS Examples: MySQL, MongoDB, Oracle, MariaDB.
+Benefits of SQL:
+- Fast → handles large data sets efficiently.
+- Easy to learn → readable, plain English syntax.
+- Reliable → enforces strict structure for accuracy.
+- Flexible → powerful querying and analysis capabilities.
+Hands‑On Setup:
+Start AttackBox and Lab Machine.
+Connect to MySQL:
+bash
+mysql -u root -p
+# password: tryhackme
+Access MySQL monitor, ready to run queries.
+
+---
+
+## Task 4 Database and Table Statements
+
+Objective: Create and manage databases and tables with SQL statements.
+Database Statements:
+- CREATE DATABASE thm_bookmarket_db; → create new database.
+- SHOW DATABASES; → list all databases.
+- USE thm_bookmarket_db; → set active database.
+- DROP DATABASE database_name; → remove database.
+Table Statements:
+CREATE TABLE book_inventory (...) → create table with columns.
+sql
+CREATE TABLE book_inventory (
+  book_id INT AUTO_INCREMENT PRIMARY KEY,
+  book_name VARCHAR(255) NOT NULL,
+  publication_date DATE
+);
+SHOW TABLES; → list tables in active database.
+DESCRIBE book_inventory; → view table structure.
+ALTER TABLE book_inventory ADD page_count INT; → modify table.
+DROP TABLE table_name; → remove table.
+
+---
+
+## Task 5 CRUD Operations
+
+Objective: Learn and apply the four basic operations in SQL databases.
+- CRUD = Create, Read, Update, Delete.
+- Create (INSERT): Adds new records.
+- Read (SELECT): Retrieves records.
+- Update (UPDATE): Modifies existing records.
+- Delete (DELETE): Removes records.
+These operations are the backbone of database interaction.
+
+---
+
+## Task 6 Clauses
+
+Objective: Learn how SQL clauses refine and organize queries.
+- DISTINCT: Removes duplicate records.
+- GROUP BY: Aggregates data into groups.
+- ORDER BY: Sorts results (ASC/DESC).
+- HAVING: Filters results after aggregation.
+
+---
+
+## Task 7 Operators
+
+Objective: Use logical and comparison operators to filter and manipulate data.
+Logical Operators: LIKE, AND, OR, NOT, BETWEEN.
+Comparison Operators: =, !=, <, >, <=, >=.
+These operators allow precise control over conditions and comparisons in queries.
+
+---
+
+## Task 8 Functions
+
+Objective: Use SQL functions to streamline queries and manipulate data.
+String Functions: CONCAT, GROUP_CONCAT, SUBSTRING, LENGTH.
+Aggregate Functions: COUNT, SUM, MAX, MIN.
+Functions enhance query efficiency and provide deeper insights into stored data.
+
+---
+
+## Tools Used 
+
+- MySQL DBMS.
+- SQL commands: CREATE, SHOW, USE, DROP, DESCRIBE, ALTER, INSERT, SELECT, UPDATE, DELETE.
+- SQL clauses: DISTINCT, GROUP BY, ORDER BY, HAVING.
+- SQL operators: LIKE, AND, OR, NOT, BETWEEN, =, !=, <, >, <=, >=.
+- SQL functions: CONCAT, GROUP_CONCAT, SUBSTRING, LENGTH, COUNT, SUM, MAX, MIN.
+
+## Findings
+
+- SQL provides a structured, reliable way to manage relational databases.
+- CRUD operations, clauses, operators, and functions form the foundation of SQL usage.
+- Keys enforce uniqueness and relationships.
+- Functions and operators allow powerful data manipulation and analysis.
+
+## Mitigation / Best Practices
+
+- Enforce primary keys for uniqueness.
+- Use foreign keys to maintain referential integrity.
+- Validate and sanitize input to prevent SQL injection.
+- Apply constraints (NOT NULL, data types) to enforce integrity.
+- Optimize queries with indexes when using operators or functions.
+
+## Conclusion
+
+- Establish the foundation of SQL Fundamentals: databases, types, SQL basics, CRUD operations, clauses, operators, and functions.
+- Understanding how to create, manage, query, and manipulate databases is essential for both offensive and defensive cybersecurity.
+- This knowledge prepares you for advanced SQL exploitation and secure database management.
