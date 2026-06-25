@@ -1,1 +1,147 @@
 # Room 33 Burp Suite: The Basics
+
+## Task 1 Introduction
+
+- Objective: Understand the purpose of Burp Suite.
+- Burp Suite is a web security testing tool used for penetration testing and vulnerability discovery.
+- This module introduces the basics of Burp Suite Community Edition.
+- Learning goals: setup, navigation, proxy usage, scoping, HTTPS interception, and example attacks.
+
+---
+
+## Task 2 What is Burp Suite
+
+- Objective: Define Burp Suite and its role.
+- Acts as a proxy between browser and target application.
+- Allows interception, modification, and analysis of HTTP/S traffic.
+- Widely used in web application penetration testing.
+
+---
+
+## Task 3 Features of Burp Community
+
+- Objective: Explore free edition features.
+- Proxy → intercept traffic.
+- Target → site map and scope.
+- Repeater → resend and modify requests.
+- Decoder → encode/decode data.
+- Comparer → compare responses.
+- Sequencer → analyze randomness of tokens.
+
+---
+
+## Task 4 Installation
+
+- Objective: Install Burp Suite.
+- Download from PortSwigger website.
+- Available for Windows, Linux, macOS.
+- Community Edition is free; Professional adds automation/scanning.
+
+---
+
+## Task 5 Dashboard
+
+- Objective: Learn the interface.
+-  Dashboard shows project tasks, event log, and issue definitions.
+- Provides overview of captured traffic and analysis.
+
+---
+
+## Task 6 Navigation
+
+- Objective: Move around Burp Suite.
+- Tabs: Proxy, Target, Repeater, Decoder, Comparer, Sequencer.
+- Each tab serves a specific testing function.
+
+---
+
+## Task 7 Options
+
+- Objective: Configure Burp Suite.
+- Proxy settings, SSL certificates, interception rules.
+- Adjust options for browser integration and traffic handling.
+
+---
+
+## Task 8 Introduction to the Burp Proxy
+
+- Objective: Use Burp Proxy.
+- Intercepts HTTP/S requests between browser and server.
+- Allows modification before forwarding.
+- Core functionality for testing.
+
+---
+
+## Task 9 Connecting through the Proxy (FoxyProxy)
+
+- Objective: Connect browser to Burp.
+- Configure browser proxy settings.
+- Use FoxyProxy extension for easier switching.
+- Route traffic through Burp for interception.
+
+---
+
+## Task 10 Site Map and Issue Definitions
+
+- Objective: Understand Burp’s site map.
+- Displays all discovered endpoints.
+- Issue definitions explain vulnerabilities Burp can identify.
+
+---
+
+## Task 11 Burp Suite Browser
+
+- Objective: Use built‑in Chromium browser.
+- Preconfigured to work with Burp Proxy.
+- Simplifies HTTPS interception and avoids manual setup.
+
+---
+
+## Task 12 Scoping and Targeting
+
+- Objective: Define what traffic Burp should capture.
+- Scope settings limit analysis to specific domains/paths.
+- Prevents clutter and focuses testing.
+
+---
+
+## Task 13 Proxying HTTPS
+
+- Objective: Handle encrypted traffic.
+- Install Burp’s CA certificate in browser.
+- Allows interception of HTTPS requests.
+- Critical for modern web testing.
+
+## Task 14 Example Attack
+
+- Objective: Demonstrate Burp in action.
+- Intercept login request.
+- Modify parameters (e.g., SQL injection, weak authentication).
+- Replay with Repeater to test responses.
+
+---
+
+## Tools Used 
+
+- Burp Suite Community Edition.
+- FoxyProxy browser extension.
+- Built‑in Burp Chromium browser.
+
+## Findings
+
+- Burp Suite is the industry standard for web application penetration testing.
+- Community Edition covers manual testing essentials.
+- Proper setup (proxy, HTTPS interception, scoping) is critical for effective use.
+
+## Mitigation / Best Practices
+
+- Always define scope to avoid testing unintended targets.
+- Secure Burp’s CA certificate to prevent misuse.
+- Use Repeater for controlled testing, not live exploitation.
+- Upgrade to Professional for automation when needed.
+
+## Conclusion
+
+- Establish the foundation of Burp Suite usage.
+- Understanding proxy interception, navigation, scoping, and HTTPS handling is essential for web security testing.
+- This knowledge prepares you for advanced Burp Suite labs and real‑world penetration testing.
