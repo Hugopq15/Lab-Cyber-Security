@@ -1,1 +1,140 @@
 # Room 31 JavaScript Essentials 
+
+## Task 1 Introduction
+
+Objective: Set up the lab environment and understand the basics of JavaScript.
+Start the Target Machine in the VM to run exercises.
+JavaScript (JS) adds interactivity to HTML/CSS websites (validation, onClick actions, animations).
+This room introduces JS fundamentals from a cybersecurity perspective, showing how attackers can abuse legitimate features.
+Prerequisites: Linux Fundamentals, Web Application Basics, How Websites Work.
+Learning Goals:
+- Basics of JS.
+- Integrating JS into HTML.
+- Abusing dialogue functions.
+- Bypassing control flow.
+- Exploring minified files.
+
+---
+
+## Task 2 Essential Concepts
+
+- Objective: Learn core building blocks of JavaScript.
+- Variables: Declared with var, let, const.
+- Data Types: string, number, boolean, null, undefined, object.
+- Functions: Group reusable code. Example: PrintResult(rollNum).
+- Loops: Repeat tasks (for, while, do...while). Example: iterate through roll numbers to print results.
+
+---
+
+## Task 3 Escalate JavaScript Overview
+
+Objective: Write and execute basic JS programs.
+JS is interpreted directly in the browser.
+- Example program:
+javascript
+console.log("Hello, World!");
+let age = 25;
+if (age >= 18) { console.log("You are an adult."); }
+else { console.log("You are a minor."); }
+function greet(name) { console.log("Hello, " + name + "!"); }
+greet("Bob");
+Use Chrome Console (Ctrl+Shift+I → Console tab) to run JS code.
+- Example addition program:
+javascript
+let x = 5; let y = 10; let result = x + y;
+console.log("The result is: " + result);
+
+---
+
+## Task 4 Integrating JavaScript in HTML
+
+- Objective: Learn how JS integrates with HTML.
+- Internal JS: Code embedded directly in HTML (<script> tags).
+- External JS: Code stored in .js file and linked with <script src="script.js"></script>.
+- Verification: Inspect page source → internal JS appears inline, external JS uses src.
+- Pen‑testing relevance: Identifying external JS files can reveal reusable logic or vulnerabilities.
+
+---
+
+## Task 5 Abusing Dialogue Functions
+
+- Objective: Explore built‑in JS dialogue functions and their abuse potential.
+- Alert: Displays message with “OK”.
+- Prompt: Requests user input. Example:
+javascript
+name = prompt("What is your name?");
+alert("Hello " + name);
+Confirm: Asks for confirmation, returns true or false.
+Exploitation Example: Malicious HTML with repeated alerts (alert("Hacked") loop).
+Security Implication: Dialogue functions can be abused in XSS attacks or denial‑of‑service scenarios.
+
+---
+
+## Task 6 Bypassing Control Flow Statements
+
+- Objective: Understand and manipulate control flow in JS.
+- Control Flow: Defines execution order (if‑else, switch, loops).
+Conditional Example: Age verification using if (age >= 18).
+Login Bypass Risk: Authentication implemented purely in JS can be bypassed by editing variables or scripts in the browser console.
+Security Implication: Never rely solely on client‑side control flow for authentication.
+
+---
+
+## Task 7 Exploring Minified Files
+
+- Objective: Learn about minification and obfuscation in JS.
+- Minification: Removes spaces, comments, shortens names → smaller size, faster load.
+- Obfuscation: Makes code unreadable (renaming variables, dummy logic).
+- Practical Example:
+Original hello.js:
+javascript
+function hi() { alert("Welcome to THM"); }
+hi();
+Obfuscated version: unreadable gibberish but still functional.
+Deobfuscation: Online tools can restore human‑readable code.
+Security Implication: Obfuscation slows attackers but does not prevent reverse engineering.
+
+---
+
+## Task 8 Best Practices
+
+Objective: Apply secure coding practices for JS in web applications.
+- Avoid Client‑Side Validation Only: Always validate on the server side.
+- Refrain from Adding Untrusted Libraries: Attackers upload malicious libraries with similar names.
+- Avoid Hardcoded Secrets: Never embed API keys or credentials in JS.
+javascript
+// Bad Practice
+const privateAPIKey = 'pk_TryHackMe-1337';
+Minify and Obfuscate Production Code: Improves performance and makes exploitation harder.
+
+---
+
+## Tools Used 
+
+- Chrome Developer Console.
+- HTML editors (Pluma, text editors).
+- Browser source inspection (View Page Source).
+- Online minification/obfuscation/deobfuscation tools.
+
+## Findings
+
+- JS integrates seamlessly with HTML/CSS to add interactivity.
+- Variables, functions, loops, and control flow are foundational but exploitable.
+- Dialogue functions and client‑side authentication can be abused.
+- Minification/obfuscation improve performance but are not foolproof.
+- Secure practices reduce attack surface and protect sensitive data.
+
+## Mitigation / Best Practices
+
+- Implement authentication and validation on the server side.
+- Use trusted libraries from verified sources.
+- Never hardcode secrets in client‑side code.
+- Minify and obfuscate JS before deploying to production.
+- Limit reliance on client‑side dialogue functions.
+
+## Conclusion
+
+- Establish the fundamentals of JavaScript security: 
+- environment setup, essential concepts, integration, dialogue functions, control flow, minification, and best practices.
+- Developers must avoid insecure client‑side logic and ensure sensitive operations are handled securely.
+- Minification and obfuscation are useful but should be combined with strong server‑side protections.
