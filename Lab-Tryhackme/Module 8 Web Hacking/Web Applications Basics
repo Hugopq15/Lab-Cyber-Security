@@ -1,1 +1,122 @@
 # Room 30 Web Applications Basics
+
+## Task 1 Introduction
+Objective: Identify fundamentals of web applications.
+Web apps run in browsers and communicate via HTTP.
+Key elements: URLs, requests, responses, headers.
+Learning goals: understand structure, request/response flow, methods, codes, and headers.
+
+---
+
+## Task 2 Web Application Overview
+
+Objective: Break down visible and hidden components.
+Front End: HTML (structure), CSS (design), JavaScript (logic).
+Back End: Databases, servers, infrastructure.
+Security Layer: WAF filters malicious traffic.
+Analogy: web app as a planet—surface = front end, ecosystem = back end.
+
+---
+
+## Task 3 Uniform Resource Locator
+Objective: Understand URL components.
+Scheme: HTTP/HTTPS.
+User: Rarely included; unsafe.
+Host/Domain: Identifies site; beware typosquatting.
+Port: 80 (HTTP), 443 (HTTPS).
+Path: Resource location.
+Query String: Parameters after ?; must be sanitized.
+Fragment: Section after #; also requires validation.
+
+---
+
+## Task 4 HTTP Messages
+
+Objective: Analyze structure of HTTP communication.
+Requests: Client → server.
+Responses: Server → client.
+Format: Start line, headers, empty line, body.
+Importance: Proper structure ensures smooth and secure communication.
+
+---
+
+## Task 5 HTTP Request Line and Methods
+Objective: Explore request methods and security.
+Request Line: METHOD /path HTTP/version.
+Methods:
+- GET → retrieve data.
+- POST → send data (validate input).
+- PUT/DELETE → update/remove (check authorization).
+Others: PATCH, HEAD, OPTIONS, TRACE, CONNECT.
+Versions: 1.0, 1.1 (common), 2, 3 (QUIC).
+Security: disable unused methods, validate paths.
+
+---
+
+## Task 6 HTTP Request Headers and Body
+
+Objective: Understand headers and body formats.
+Headers: Host, User-Agent, Referer, Cookie, Content-Type.
+Body Formats:
+- URL Encoded → key=value pairs.
+- Form Data → multipart, supports files.
+- JSON → structured pairs.
+- XML → nested tags.
+Security: validate input, secure cookies, handle content types correctly.
+
+---
+
+## Task 7 HTTP Response Status Lines and Status Code
+Objective: Learn how servers communicate outcomes.
+Categories:
+- 100–199 → informational.
+- 200–299 → success.
+- 300–399 → redirection.
+- 400–499 → client errors.
+- 500–599 → server errors.
+Examples: 200 OK, 301 Moved Permanently, 404 Not Found, 500 Internal Server Error.
+
+---
+
+## Task 8 HTTP Response Headers and Body
+Objective: Examine server metadata and content.
+Required Headers: Date, Content-Type, Server.
+Other Headers: Set-Cookie, Cache-Control, Location.
+Response Body: HTML, JSON, images.
+Security: sanitize/escape user data to prevent XSS.
+
+---
+
+## Task 9 Security Headers
+
+Objective: Explore headers that enhance security.
+CSP: Restricts sources for scripts/styles.
+HSTS: Forces HTTPS, applies to subdomains, preload option.
+X-Content-Type-Options: Prevents MIME sniffing (nosniff).
+Referrer-Policy: Controls referrer info shared (no-referrer, same-origin, strict-origin, etc.).
+
+---
+
+## Tools Used 
+
+- Browser developer tools.
+- curl / Postman / Burp Suite.
+- Securityheaders.io for header analysis.
+
+## Findings
+
+- Web apps rely on structured communication via URLs, requests, and responses.
+- Improper handling of methods, headers, or body data exposes vulnerabilities.
+- Security headers are essential but often missing.
+- Mitigation / Best Practices
+- Enforce HTTPS and configure HSTS.
+- Validate/sanitize all input (query strings, body data).
+- Secure cookies with HttpOnly and Secure flags.
+- Implement CSP and Referrer-Policy.
+- Restrict HTTP methods to only those required.
+
+## Conclusion
+
+- Establish the foundation of web application security.
+- Understanding URLs, HTTP messages, methods, headers, and codes is critical for diagnosing issues and defending against attacks.
+- Security headers provide a strong defense layer, ensuring safer client-server communication.
