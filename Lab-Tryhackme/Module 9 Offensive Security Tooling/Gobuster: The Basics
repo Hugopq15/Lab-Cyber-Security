@@ -1,1 +1,148 @@
 # Room 35 Gobuster: The Basics
+
+## Task 1 Introduction
+
+Objective: Identify fundamentals of Gobuster.
+Gobuster is an offensive security tool used for reconnaissance.
+Enumerates web directories, subdomains, and virtual hosts.
+Supports brute force enumeration using wordlists.
+Commonly used in penetration testing, bug bounty hunting, and security assessments.
+Learning goals:
+- Understand enumeration basics.
+- Use Gobuster for directories, subdomains, and vhosts.
+- Apply wordlists effectively.
+
+---
+
+## Task 2 Environment and Setup
+
+Objective: Prepare the lab environment.
+- AttackBox: preinstalled with Gobuster.
+- -Lab Machine: Ubuntu 20.04 VM hosting multiple subdomains, vhosts, and CMS (WordPress, Joomla).
+- DNS setup: edit /etc/resolv-dnsmasq to include nameserver MACHINE_IP.
+- Restart service with /etc/init.d/dnsmasq restart.
+- Key point: Proper DNS resolution ensures Gobuster can enumerate domains correctly.
+
+---
+
+## Task 3 Gobuster Overview
+
+Objective: Explore Gobuster’s capabilities.
+Written in Golang, open-source.
+Modes:
+- dir → directory/file enumeration.
+- dns → subdomain enumeration.
+- vhost → virtual host enumeration.
+- Others: fuzzing, AWS S3, GCS buckets, TFTP.
+Flags:
+- -t threads (default 10).
+- -w wordlist path.
+- --delay between requests.
+- --debug troubleshooting.
+- -o output results to file.
+Example:
+Code
+- gobuster dir -u http://www.example.thm/ -w /usr/share/wordlists/dirb/small.txt -t 64
+
+---
+
+## Task 4 Directory and File Enumeration
+
+Objective: Use Gobuster in dir mode to discover directories and files.
+Gobuster’s dir mode brute forces directory structures using wordlists.
+Useful in penetration testing to reveal hidden paths (e.g., WordPress: /wp-admin, /wp-content, /wp-includes).
+Returns HTTP status codes to indicate accessibility.
+Flags:
+- -c / --cookies → pass session cookies.
+- -x / --extensions → specify file extensions (.php, .js).
+- -H / --headers → add custom headers.
+- -k / --no-tls-validation → skip TLS checks.
+- -n / --no-status → hide status codes.
+- -P / --password + -U / --username → authenticated requests.
+- -s / --status-codes → show specific codes.
+- -b / --status-codes-blacklist → hide unwanted codes.
+- -r / --followredirect → follow HTTP redirects.
+Examples:
+Code
+- gobuster dir -u http://www.example.thm -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -r
+Code
+- gobuster dir -u http://www.example.thm -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x .php,.js
+
+---
+
+## Task 5 Subdomain Enumeration
+
+Objective: Use Gobuster in dns mode to discover subdomains.
+Subdomains may contain vulnerabilities not present in the main domain.
+Example: tryhackme.thm vs. mobile.tryhackme.thm.
+Flags:
+- -c / --show-cname → display CNAME records.
+- -i / --show-ips → show resolved IP addresses.
+- -r / --resolver → specify custom DNS server.
+- -d / --domain → target domain.
+Example:
+Code
+- gobuster dns -d example.thm -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+Sample output:
+- Found: www.example.thm
+- Found: shop.example.thm
+- Found: academy.example.thm
+- Found: primary.example.thm
+
+---
+
+## Task 6 Virtual Host Enumeration
+
+Objective: Use Gobuster in vhost mode to discover virtual hosts.
+Virtual hosts = multiple websites hosted on the same server/IP.
+Difference vs. subdomains:
+- DNS mode → queries DNS records (-d flag).
+- Vhost mode → brute forces hostnames via HTTP requests (-u flag).
+Flags:
+- -u / --url → base URL.
+- --append-domain → appends base domain to wordlist entries.
+- -m / --method → HTTP method.
+- --domain → sets domain appended to wordlist entries.
+- --exclude-length → filters responses by body length.
+- -r / --follow-redirect → follows HTTP redirects.
+Example:
+Code
+gobuster vhost -u http://MACHINE_IP --domain example.thm -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain --exclude-length 250-320
+Sample output:
+- Found: blog.example.thm → Status 200
+- Found: shop.example.thm → Status 200
+- Found: academy.example.thm → Status 200
+- False positives filtered by --exclude-length.
+
+---
+
+## Tools Used
+
+- Gobuster (AttackBox).
+- Wordlists (Dirbuster, SecLists).
+- DNS configuration files.
+- Browser developer tools (to inspect requests).
+
+## Findings
+
+- Gobuster efficiently discovers hidden directories, files, subdomains, and vhosts.
+- Enumeration relies heavily on wordlists.
+- Misconfigured DNS or missing entries in /etc/hosts can cause failures.
+- High thread counts improve speed but may trigger detection.
+- False positives in vhost mode can be filtered by response length.
+
+## Mitigation / Best Practices
+
+- Limit enumeration attempts to avoid detection.
+- Use appropriate wordlists for context (small vs. large).
+- Monitor server logs for brute force activity.
+- Harden web servers against directory listing and default vhosts.
+- Implement rate limiting and WAF rules.
+- Secure DNS and virtual host configurations.
+
+## Conclusion
+
+- Gobuster is a versatile tool for reconnaissance in penetration testing.
+- Understanding its modes (dir, dns, vhost) is essential for effective use.
+- Proper environment setup (DNS, wordlists, threads) ensures accurate results.
+- Defensive measures (rate limiting, monitoring, WAF, strong configurations) mitigate enumeration risks.
