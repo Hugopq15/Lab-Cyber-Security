@@ -1,1 +1,81 @@
 # Room 34 Hydra
+
+## Task 1 Hydra Introduction
+Objective: Understand Hydra fundamentals.
+- Hydra is a brute force online password cracking tool.
+- Automates login attempts across multiple protocols (SSH, FTP, HTTP forms, etc.).
+- Importance: highlights why strong, complex passwords are necessary.
+- Weak/default credentials (e.g., admin:password) are easily compromised.
+
+---
+
+## Task 2 Using Hydra
+
+Objective: Learn how to set up and run Hydra.
+- Hydra is preinstalled on AttackBox (TryHackMe environment).
+- Requires attacker machine + target machine setup.
+- Can also be installed on Linux distros (Ubuntu: apt install hydra, Fedora: dnf install hydra).
+- Official repository provides protocol-specific options.
+- Objective: Explore Hydra syntax for SSH brute force.
+Command:
+Code
+- hydra -l <username> -P <password_list> MACHINE_IP -t 4 ssh
+Options:
+- -l → username.
+- -P → password list.
+- -t → threads (parallel attempts).
+Example:
+Code
+- hydra -l root -P passwords.txt MACHINE_IP -t 4 ssh
+Hydra will:
+- Use root as username.
+- Try all passwords in passwords.txt.
+- Run 4 threads simultaneously.
+- Task 4 Hydra Commands (Web Form Example)
+Objective: Brute force web login forms with Hydra.
+Command:
+Code
+- hydra -l <username> -P <wordlist> MACHINE_IP http-post-form "<path>:<login_credentials>:<invalid_response>" -V
+Options:
+- -l → username.
+- -P → password list.
+- http-post-form → specifies POST method.
+<path> → login page (e.g., login.php).
+- <login_credentials> → username=^USER^&password=^PASS^.
+- <invalid_response> → string returned when login fails (e.g., F=incorrect).
+- -V → verbose output.
+Example:
+- Code
+- hydra -l admin -P wordlist.txt MACHINE_IP http-post-form "/:username=^USER^&password=^PASS^:F=incorrect" -V
+Notes:
+Replace ^USER^ and ^PASS^ dynamically.
+Can specify non-default ports with -s <port>.
+
+---
+
+## Tools Used
+
+- Hydra (preinstalled on AttackBox).
+- Password lists (e.g., rockyou.txt).
+- Browser developer tools (to inspect form requests).
+
+## Findings
+
+- Hydra demonstrates the risk of weak/default credentials.
+- Supports brute force across many protocols (SSH, FTP, HTTP, SNMP, etc.).
+- Parallel threads accelerate brute force attempts.
+- Web forms require identifying request type (GET/POST) and failure response strings.
+
+## Mitigation / Best Practices
+
+- Always change default credentials.
+- Use strong passwords (length > 8, special characters, non-dictionary).
+- Implement account lockout policies after failed attempts.
+- Monitor logs for brute force activity.
+- Use multi-factor authentication (MFA).
+
+## Conclusion
+
+- Hydra is a powerful brute force tool for testing authentication security.
+- Demonstrates why password hygiene and defensive measures are critical.
+- Understanding Hydra commands helps defenders anticipate and mitigate brute force attacks.
