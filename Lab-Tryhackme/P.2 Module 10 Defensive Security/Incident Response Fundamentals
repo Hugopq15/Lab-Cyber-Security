@@ -1,1 +1,143 @@
 # Room 41 Incident Response Fundamentals
+
+## Task 1 Introduction to Incident Response
+
+Objective: Understand the importance of incident response.
+- Incident Response (IR) is the structured process of handling cyber incidents from start to finish.
+- It includes prevention, detection, containment, eradication, recovery, and lessons learned.
+- Cybersecurity incidents can cause financial and reputational damage; IR provides guidelines to reduce losses.
+Learning Objectives:
+- What incidents are and their severity levels.
+ Common types of incidents.
+- Phases of Incident Response (SANS and NIST frameworks).
+- Tools and Playbooks for detection and response.
+- Building an Incident Response Plan.
+
+---
+
+## Task 2 What are Incidents?
+
+Objective: Define incidents and understand alerts.
+Events vs Alerts:
+- Devices generate numerous events (routine logs).
+- Security solutions ingest these events and raise alerts when suspicious activity is detected.
+Alert Classification:
+- False Positive: Alert raised but activity is harmless (e.g., backup flagged as suspicious).
+- True Positive: Alert raised and activity is harmful (e.g., phishing email confirmed malicious).
+Incidents:
+- True positives that represent real harmful activity.
+Categorized by severity levels:
+- Critical → highest priority.
+- High → serious but not catastrophic.
+- Medium → moderate impact.
+- Low → minor impact.
+
+---
+
+## Task 3 Types of Incidents
+
+Objective: Identify common categories of cybersecurity incidents.
+Types:
+- Malware Infections: Malicious programs damaging systems/networks.
+- Security Breaches: Unauthorized access to confidential data.
+- Data Leaks: Exposure of sensitive information (intentional or accidental).
+- Insider Attacks: Malicious actions from within the organization.
+- Denial of Service (DoS): Flooding systems with false requests, exhausting resources.
+Impact Considerations:
+- Severity varies by organization.
+- Example: A data leak may be minor for one company but catastrophic for another; a DoS attack on a primary website can cause massive financial loss.
+
+---
+
+## Task 4 Incident Response Process
+
+Objective: Learn structured frameworks for incident response.
+- SANS Framework (PICERL – 6 Phases):
+- Preparation: Build resources, teams, and plans.
+- Identification: Detect abnormal behavior/events.
+- Containment: Isolate compromised systems to minimize impact.
+- Eradication: Remove threats (e.g., malware scans).
+- Recovery: Restore systems from backups, reconfigure, test.
+- Lessons Learned: Review gaps, document improvements.
+NIST Framework (4 Phases):
+- Preparation.
+- Detection & Analysis.
+- Containment, Eradication & Recovery.
+- Post-Incident Activity.
+Incident Response Plan Components:
+- Roles and responsibilities.
+- Methodology.
+- Communication plan (including law enforcement).
+- Escalation paths.
+
+---
+
+## Task 5 Incident Response Techniques
+
+Objective: Explore tools and playbooks for detection and response.
+Security Solutions:
+- SIEM: Collects logs, correlates events, identifies incidents.
+- AV (Antivirus): Detects known malicious programs.
+- EDR: Endpoint-level protection, detection, containment, and eradication.
+Playbooks:
+- Step-by-step guidelines for handling specific incidents.
+Example: Phishing Email Playbook
+- Notify stakeholders.
+- Analyze email headers/body.
+- Check attachments.
+- Determine if attachments were opened.
+- Isolate infected systems.
+- Block sender.
+Runbooks:
+- Detailed execution steps for specific actions, varying by resources available.
+
+---
+
+## Task 6 Lab Work Incident Response
+
+Objective: Apply incident response in a simulated environment.
+Scenario:
+A phishing email delivers malware via attachment.
+Analysts investigate how many hosts are infected or affected.
+Steps include:
+- Identify infected hosts.
+- Isolate compromised systems.
+- Contain and eradicate malware.
+- Review timeline of events.
+Outcome:
+- Practical exercise reinforces the complete incident response lifecycle.
+
+---
+
+## Tools Used 
+
+- SIEM, IDS/IPS, AV, EDR.
+- Incident Response Playbooks and Runbooks.
+- Security monitoring dashboards.
+- Malware analysis and containment tools.
+
+## Findings
+
+- Incident Response requires structured frameworks (SANS/NIST).
+- Alerts must be analyzed to distinguish false positives from true incidents.
+- Incidents vary in type and severity, requiring tailored responses.
+- Playbooks and runbooks streamline response and reduce errors.
+- Lab exercises demonstrate real-world application of IR phases.
+
+## Mitigation / Best Practices
+
+- Implement continuous monitoring with SIEM and IDS/IPS.
+- Train analysts to reduce false positives and identify true incidents.
+- Classify incidents by severity to prioritize response.
+- Develop and maintain Incident Response Plans and Playbooks.
+- Regularly update systems to reduce malware and breach risks.
+- Educate employees to prevent phishing and insider threats.
+- Conduct post-incident reviews to improve processes.
+
+## Conclusion
+
+- Incident Response provides a comprehensive framework for managing cyber incidents.
+- SANS and NIST frameworks guide organizations through structured phases.
+- Tools like SIEM, AV, and EDR support detection and response.
+- Playbooks and runbooks ensure consistent, efficient handling of incidents.
+- Practical exercises reinforce the importance of preparation, detection, containment, eradication, recovery, and lessons learned.
