@@ -1,1 +1,65 @@
 # Room 38 Defensive Security Intro
+
+## Task 1 Think like a Defender
+Objective: Understand the role of defensive security.
+Defensive security is the process of defending and securing devices and systems.
+Unlike offensive security, defenders do not attack systems; they monitor, detect, and respond to threats before damage occurs.
+Main goal of defensive security:
+- Detect and respond to attacks.
+
+---
+
+## Task 2 Detect Suspicious Activity
+Scenario: Joe, an apprentice SOC analyst, is on his first solo shift. His monitoring dashboard shows unusual activity.
+Objective: Identify suspicious traffic.
+- Open the monitoring dashboard.
+- Review recent alerts.
+- Identify the suspicious source IP address.
+- Outcome: Detect abnormal behavior and flag the attacker’s IP.
+
+---
+
+## Task 3 Identify the Attack
+
+Objective: Investigate the attacker’s actions.
+- Review the “URL Discovery Attempts” list.
+- Look at the latest entry to determine the type of attack.
+- Outcome: Understand what the attacker is trying to achieve (e.g., probing for vulnerabilities, attempting command injection, or scanning directories).
+
+---
+
+## Task 4 Stop the Attack
+
+Objective: Contain the threat.
+- Joe has already applied some security updates.
+- Add the attacker’s IP (32.122.195.63) into the firewall rule.
+- Select BLOCK and apply the rule.
+- Outcome: The attacker’s connection is blocked, preventing further malicious activity.
+
+---  
+
+## Tools Used
+
+- Monitoring dashboards for alerts.
+- Firewall rules for containment.
+- SOC analyst workflows for detection and response.
+
+## Findings
+
+- Defensive security focuses on early detection and containment.
+- Identifying suspicious IPs and attack patterns is critical.
+- Blocking malicious traffic is a key step in incident response.
+
+## Mitigation / Best Practices
+
+- Continuously monitor network traffic.
+- Investigate anomalies quickly.
+- Apply firewall rules to block malicious sources.
+- Keep systems updated with security patches.
+- Train SOC analysts to recognize attack patterns.
+
+## Conclusion
+
+- Defensive security is about protecting systems, not attacking them.
+- Detecting suspicious activity, identifying attacks, and blocking threats are core responsibilities.
+- Practical exercises reinforce the importance of containment and proactive defense in cybersecurity.
