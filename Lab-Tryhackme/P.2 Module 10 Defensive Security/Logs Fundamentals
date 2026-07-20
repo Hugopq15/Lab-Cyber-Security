@@ -1,1 +1,121 @@
 # Room 42 Logs Fundamentals
+
+## Task 1 Introduction to Logs
+
+Objective: Understand the role of logs in cybersecurity.
+- Logs are digital footprints of activities, both normal and malicious.
+- They are essential for investigations, similar to physical traces in crime scenes.
+Use Cases:
+- Security Events Monitoring: Detect anomalous behavior in real time.
+- Incident Investigation & Forensics: Provide traces for root cause analysis.
+- Troubleshooting: Record errors to diagnose and fix issues.
+- Performance Monitoring: Offer insights into application/system performance.
+- Auditing & Compliance: Establish activity trails for regulatory requirements.
+Learning Objectives:
+- Types of logs.
+- How to analyze logs.
+- Analyzing Windows Event logs.
+- Analyzing Web Access logs.
+
+---
+
+## Task 2 Types of Logs
+
+Objective: Learn categories of logs and their usage.
+Log Categories:
+- System Logs: OS activities (startup/shutdown, drivers, hardware).
+- Security Logs: Authentication, authorization, policy changes, abnormal activity.
+- Application Logs: Application-specific events (errors, updates, interactions).
+- Audit Logs: Detailed system/user changes (data access, compliance).
+- Network Logs: Traffic, firewall, connection records.
+- Access Logs: Resource access (webserver, database, API).
+Log Analysis:
+- Extract valuable data from logs.
+- Identify abnormal/unusual activities.
+- Manual and automated techniques are used.
+
+---
+
+## Task 3 Windows Event Logs Analysis
+
+Objective: Investigate logs in Windows OS using Event Viewer.
+Windows Log Categories:
+- Application Logs: Errors, warnings, compatibility issues.
+- System Logs: Driver/hardware issues, startup/shutdown, services.
+- Security Logs: Authentication, account changes, policy changes.
+Event Viewer:
+- Built-in GUI tool for viewing and analyzing logs.
+- Features: Log Name, Timestamp, Event ID, Description.
+Important Event IDs:
+- 4624 → Successful login.
+- 4625 → Failed login.
+- 4634 → Logoff.
+- 4720 → Account created.
+- 4724 → Password reset attempt.
+- 4722 → Account enabled.
+- 4725 → Account disabled.
+- 4726 → Account deleted.
+Filtering Logs:
+- Use “Filter Current Log” to isolate specific Event IDs.
+Example: Filter 4624 to view successful login attempts.
+Exercise Scenario:
+- A file server was compromised, and critical data exfiltrated.
+- Analysts identified the username and IP of the compromised system.
+- Task: Investigate attacker’s activities in Windows Event Logs before accessing the file server.
+
+---
+
+## Task 4 Web Server Access Logs Analysis
+
+Objective: Analyze web server access logs to detect suspicious activity.
+- Log Fields (Apache access.log):
+- IP Address: Source of request.
+- Timestamp: When the request occurred.
+- HTTP Method: Action requested (GET, POST, etc.).
+- URL: Resource requested.
+- Status Code: Server response (200 = OK, 404 = Not Found, 500 = Server Error).
+User-Agent: Browser/OS details of the requester.
+Manual Log Analysis Commands (Linux):
+- cat: Display contents of log files.
+- cat access.log → shows all entries.
+- cat access1.log access2.log > combined_access.log → merge logs.
+- grep: Search for specific strings/patterns.
+- grep "192.168.1.1" access.log → find all requests from IP 192.168.1.1.
+- less: View logs page by page.
+- less access.log → navigate logs with space (next page), b (previous page).
+/pattern → search within logs.
+Exercise Scenario:
+- A sample web server access log is provided.
+- Analysts must use cat, grep, and less to investigate suspicious traffic.
+- Tasks include identifying source IPs, request types, and unusual status codes (e.g., repeated 404 or 500 errors).
+
+---
+
+## Tools Used 
+
+- Windows Event Viewer → GUI for system, application, and security logs.
+- Linux CLI utilities: cat, grep, less.
+- Apache access.log → Web server request tracking.
+- SIEM/Log Management Tools → Centralized log analysis.
+
+## Findings
+
+- Logs are critical for detecting and investigating attacks.
+- Windows Event Logs provide detailed insights into user/system activity.
+- Web server access logs reveal request patterns, suspicious IPs, and potential exploitation attempts.
+- Command-line tools (cat, grep, less) simplify manual log analysis.
+
+## Mitigation / Best Practices
+
+- Regularly review both system and web server logs.
+- Memorize key Windows Event IDs for faster investigations.
+- Use filters and search utilities to reduce noise.
+- Centralize logs with SIEM for correlation across systems.
+- Protect logs from tampering to ensure forensic integrity.
+- Monitor web server logs for repeated failed requests or abnormal traffic.
+
+## Conclusion
+
+- Logs are the backbone of forensic investigations and monitoring.
+- Windows Event Logs and Web Server Access Logs provide complementary insights into system and network activity.
+- Structured log analysis strengthens detection, investigation, and response to cyber incidents.
