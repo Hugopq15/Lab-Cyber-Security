@@ -1,1 +1,112 @@
 # Room 40  Digital Forensics Fundamentals
+
+## Task 1 Introduction to Digital Forensics
+
+Objective: Understand the role of digital forensics in cybercrime investigations.
+- Digital forensics applies investigative methods to digital devices involved in crimes.
+- Cybercrime includes any criminal activity conducted on or using digital devices.
+Example case: 
+- A bank robber’s laptop, hard drive, USB, and mobile phone revealed maps, escape routes, security bypass plans, media files of past robberies, and illegal chat groups.
+Evidence is collected, stored, analyzed, and reported following strict forensic procedures.
+Learning Objectives:
+- Phases of digital forensics.
+- Types of digital forensics.
+- Evidence acquisition procedures.
+- Windows forensics.
+- Solving a forensic case.
+
+---
+
+## Task 2 Digital Forensics Methodology
+
+Objective: Learn the NIST-defined four phases of digital forensics.
+Phases:
+- Collection: Identify and secure devices (PCs, laptops, USBs, cameras). Ensure original data integrity.
+- Examination: Filter large datasets to extract relevant information (e.g., specific dates, user accounts).
+- Analysis: Correlate evidence chronologically to draw conclusions.
+- Reporting: Prepare detailed reports with methodology, findings, and executive summaries for law enforcement.
+Types of Digital Forensics:
+- Computer forensics → Investigating computers.
+- Mobile forensics → Extracting evidence from mobile devices.
+- Network forensics → Analyzing traffic logs and intrusions.
+- Database forensics → Investigating unauthorized modifications or exfiltration.
+- Cloud forensics → Examining evidence stored in cloud infrastructure.
+- Email forensics → Investigating phishing or fraudulent campaigns.
+
+---
+
+## Task 3 Evidence Acquisition
+
+Objective: Learn secure evidence collection practices.
+Key Practices:
+- Proper Authorization: Obtain legal approval before collecting data; unauthorized evidence may be inadmissible.
+- Chain of Custody: Maintain a formal document tracking evidence description, collector, date/time, storage, and access records. Ensures integrity and accountability.
+- Use of Write Blockers: Prevent accidental modification of evidence when connecting suspect devices to forensic workstations. Write blockers preserve original timestamps and file states.
+
+---
+
+## Task 4 Windows Forensics
+
+Objective: Understand evidence acquisition and analysis in Windows systems.
+Types of Forensic Images:
+- Disk Image: Contains all non-volatile data (files, browsing history, documents). Survives restarts.
+- Memory Image: Contains volatile data (open files, running processes, network connections). Must be captured first, since data is lost after shutdown or restart.
+Popular Tools:
+- FTK Imager: Creates disk images, supports multiple formats, and allows analysis.
+- Autopsy: Open-source forensic platform for disk image analysis (keyword search, deleted file recovery, metadata analysis).
+- DumpIt: Command-line tool for capturing memory images.
+- Volatility: Open-source framework for analyzing memory images with plugins (processes, DLLs, network connections, malware detection).
+
+---
+
+## Task 5 Practical Example of Digital Forensics
+
+Objective: Apply forensic techniques to real-world evidence.
+Scenario:
+- A kidnapper sends a ransom note in MS Word format, later converted to PDF.
+Investigators analyze the file metadata to gather clues.
+Steps:
+- PDF Metadata Analysis (pdfinfo):
+- Reveals creator, producer, creation date, and software used.
+Example: Created with Microsoft Word for Office 365 on October 10, 2018.
+- Image Metadata Analysis (EXIF Data):
+- Embedded in photos taken with smartphones or cameras.
+- Includes: camera model, date/time, photo settings, and GPS coordinates.
+Example: GPS coordinates 51°30'51.9"N 0°05'38.7"W reveal the street location where the photo was taken.
+
+## Tools Used:
+
+- pdfinfo: Extracts metadata from PDF files.
+- ExifTool: Reads and writes metadata in images (including GPS data).
+- Mapping Services (Google Maps, Bing Maps): Convert GPS coordinates into physical locations.
+Outcome:
+- Metadata analysis provides critical investigative leads (software used, creation time, and location of photos).
+- Even simple documents and images can reveal hidden evidence.
+- Forensic workstations.
+- Write blockers.
+- Chain of custody documentation.
+- FTK Imager, Autopsy, DumpIt, Volatility.
+- Mapping services (Google Maps, Bing Maps).
+
+## Findings
+
+- Digital forensics follows a structured methodology (Collection → Examination → Analysis → Reporting).
+- Evidence acquisition requires strict legal and technical safeguards.
+- Windows forensic imaging requires both disk and memory captures for complete evidence.
+- Metadata in files and images can reveal hidden details about authorship, creation time, and location.
+
+## Mitigation / Best Practices
+
+- Always obtain proper authorization before evidence collection.
+- Maintain a clear chain of custody to ensure admissibility in court.
+- Use write blockers to preserve evidence integrity.
+- Capture memory images first to avoid losing volatile data.
+- Document all acquisition steps for legal admissibility.
+- Analyze metadata carefully; even small details can provide investigative breakthroughs.
+
+## Conclusion
+
+- Digital forensics is essential for investigating cybercrimes and supporting legal proceedings.
+- Following proper methodology ensures evidence integrity and reliability.
+- Emphasize the importance of structured phases, diverse forensic domains, secure evidence acquisition, Windows forensic imaging, and metadata analysis.
+- Combining forensic tools with standardized practices strengthens investigations and equips defenders to uncover hidden evidence.
