@@ -1,1 +1,109 @@
 # Room 39 SOC Fundamentals
+
+## Task 1 Introduction to SOC
+
+Objective: Understand the purpose of a Security Operations Center (SOC).
+- SOC = dedicated facility with a specialized security team.
+- Operates 24/7 to monitor, detect, and respond to threats.
+- Protects confidential data against unauthorized access, loss, or modification.
+
+---
+
+## Task 2 Purpose and Components
+
+Objective: Learn the SOC’s main focus: Detection and Response.
+Detection:
+- Vulnerabilities.
+- Unauthorized activity.
+- Policy violations.
+- Intrusions.
+Response:
+- Support incident response.
+- Minimize impact and perform root cause analysis.
+SOC Pillars:
+- People.
+- Process.
+- Technology.
+
+---
+
+## Task 3 People
+
+Objective: Understand SOC team roles.
+SOC Hierarchy:
+- Level 1 Analyst → First responders, alert triage.
+- Level 2 Analyst → Deeper investigations, correlation.
+- Level 3 Analyst → Handle critical incidents, containment, recovery.
+- Security Engineer → Deploy/configure solutions.
+- Detection Engineer → Build detection rules.
+- SOC Manager → Oversees processes, communicates with CISO.
+
+---
+
+## Task 4 Process
+
+Objective: Learn SOC processes.
+- Alert Triage (5 Ws):
+- What? Malicious file detected.
+- When? June 5, 2024, 13:20.
+- Where? Host “GEORGE PC”.
+- Who? User George.
+- Why? Downloaded pirated software.
+Reporting: Escalate harmful alerts with evidence.
+Incident Response & Forensics: Handle critical detections, analyze root cause.
+
+---
+
+## Task 5 Technology
+
+Objective: Explore SOC technology.
+Key Solutions:
+- SIEM: Collects logs, applies detection rules, correlates data. Detection only.
+- EDR: Endpoint visibility, automated responses, detailed investigations.
+- Firewall: Network barrier, filters traffic, blocks suspicious connections.
+- Other Tools: Antivirus, IDS/IPS, XDR, SOAR, EPP.
+
+---
+
+## Task 6 Practical Exercise of SOC
+
+Objective: Apply People, Processes, and Technology.
+Scenario:
+- Role: Level 1 SOC Analyst.
+- Alert: Port scanning detected.
+- Source IP: 10.0.0.8 (internal vulnerability assessment team).
+- Action: Investigate logs, confirm activity, document findings.
+- Outcome: Differentiate between legitimate internal scans and malicious external scans.
+
+---
+
+## Tools Used
+
+- SIEM → Centralized log collection and detection.
+- EDR → Endpoint visibility and automated response.
+- Firewalls → Network traffic filtering.
+- IDS/IPS, SOAR, XDR → Advanced detection and automation.
+
+## Findings
+
+- SOC relies on continuous monitoring and triage.
+- People, Process, and Technology together ensure effective detection and response.
+- Practical exercises highlight the importance of distinguishing false positives from real threats.
+- Layered tools (SIEM, EDR, Firewall) provide defense in depth.
+
+## Mitigation / Best Practices
+
+- Deploy layered security solutions.
+- Continuously update detection rules and signatures.
+- Train analysts to reduce false positives.
+- Automate repetitive tasks with SOAR/XDR.
+- Patch systems regularly.
+- Monitor inbound/outbound traffic for anomalies.
+- Escalate incidents quickly with proper reporting.
+
+## Conclusion
+
+- SOC Fundamentals emphasize People, Process, and Technology as the three pillars of defense.
+- Detection and response are the core functions of SOC.
+- Practical exercises reinforce analyst skills in triage, reporting, and containment.
+- A mature SOC environment is essential for protecting organizations against modern cyber threats.
