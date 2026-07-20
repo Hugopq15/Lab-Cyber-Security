@@ -1,6 +1,7 @@
 # Room 38 Defensive Security Intro
 
 ## Task 1 Think like a Defender
+
 Objective: Understand the role of defensive security.
 Defensive security is the process of defending and securing devices and systems.
 Unlike offensive security, defenders do not attack systems; they monitor, detect, and respond to threats before damage occurs.
@@ -10,6 +11,7 @@ Main goal of defensive security:
 ---
 
 ## Task 2 Detect Suspicious Activity
+
 Scenario: Joe, an apprentice SOC analyst, is on his first solo shift. His monitoring dashboard shows unusual activity.
 Objective: Identify suspicious traffic.
 - Open the monitoring dashboard.
