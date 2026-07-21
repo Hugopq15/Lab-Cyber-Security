@@ -80,6 +80,16 @@ Example:
 
 --- 
 
+## Tools Used
+
+- CAPA (capa.exe) → static analysis of binaries.
+- PowerShell → execution environment for CAPA on Windows.
+- CAPA Rule Sets (YAML) → define capabilities, namespaces, and behaviors.
+- MITRE ATT&CK Framework → maps tactics and techniques.
+- MAEC (Malware Attribute Enumeration and Characterization) → categorizes malware attributes.
+- MBC (Malware Behavior Catalogue) → objectives, behaviors, and micro-behaviors.
+- CAPA Web Explorer
+
 ## Findings
 
 - CAPA automates reverse engineering knowledge.
