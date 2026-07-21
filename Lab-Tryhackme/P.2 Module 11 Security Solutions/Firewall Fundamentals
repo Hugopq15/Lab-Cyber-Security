@@ -1,1 +1,122 @@
 # Room 44 Firewall Fundamentals
+
+33 Task 1 What Is the Purpose of a Firewall
+
+Objective: Understand the role of firewalls in protecting devices and networks.
+- Firewalls act like security guards, inspecting incoming and outgoing traffic.
+- They enforce rules to allow or deny traffic.
+- Modern firewalls add advanced protections beyond simple filtering.
+Learning Objectives:
+- Types of firewalls.
+- Firewall rules and components.
+- Hands-on practice with Windows and Linux firewalls.
+- Outcome: Firewalls are the first line of defense against unauthorized access.
+
+---
+
+## Task 2 Types of Firewalls
+
+Objective: Learn firewall types and their OSI model layers.
+- Stateless Firewall (Layer 3/4):
+- Filters packets by static rules.
+- Fast, but does not track connection states.
+- Stateful Firewall (Layer 3/4):
+- Tracks connection states in a table.
+- Allows or denies future packets based on history.
+- Proxy Firewall (Layer 7):
+- Application-level gateway.
+- Inspects packet contents.
+- Provides anonymity and content filtering.
+- Next-Generation Firewall (Layer 3–7):
+- Deep packet inspection.
+- Intrusion Prevention System (IPS).
+- Heuristic analysis for attack patterns.
+- SSL/TLS decryption and threat intelligence integration.
+Comparison Table:
+Firewall Type	Characteristics
+- Stateless	Basic filtering, no state tracking, efficient for speed
+- Stateful	Tracks connections, applies complex rules, monitors patterns
+- Proxy	Inspects packet content, supports content filtering, application control
+- NGFW	Advanced threat protection, IPS, anomaly detection, SSL/TLS decryption
+- Outcome: Different firewalls serve different use cases and layers.
+
+---
+
+## Task 3 Rules in Firewalls
+
+Objective: Learn how firewall rules control traffic.
+Rule Components:
+- Source Address
+- Destination Address
+- Port
+- Protocol
+- Action (Allow, Deny, Forward)
+- Direction (Inbound, Outbound, Forward)
+Examples:
+- Allow outbound HTTP (port 80).
+- Deny inbound SSH (port 22).
+- Forward inbound HTTP to web server.
+- Outcome: Rules provide granular control over traffic flow.
+
+---
+
+## Task 4 Windows Defender Firewall
+
+Objective: Configure Windows Defender Firewall.
+- Built-in firewall in Windows OS.
+- Profiles: Private (home/trusted) and Public (untrusted).
+Options: allow/disallow apps, block all incoming connections, restore defaults.
+Custom Rule Example:
+- Block outbound HTTP/HTTPS (ports 80,443).
+- Steps: Advanced Settings → Outbound Rules → New Rule → TCP → Specific Ports → Block → Apply to all profiles → Name rule.
+- Outcome: Browsing websites fails, confirming rule works.
+- Exercise: Review created rules to identify blocked traffic.
+
+---
+
+## Task 5 Linux iptables Firewall
+
+Objective: Explore Linux firewall utilities.
+Netfilter Framework: Provides packet filtering, NAT, and connection tracking.
+Utilities:
+- iptables: Widely used, flexible.
+- nftables: Successor to iptables, more efficient.
+- firewalld: Zone-based, predefined rule sets.
+ufw (Uncomplicated Firewall): Beginner-friendly wrapper for iptables.
+ufw Commands:
+- Check status: sudo ufw status
+- Enable firewall: sudo ufw enable
+- Allow all outgoing traffic: sudo ufw default allow outgoing
+- Deny incoming SSH: sudo ufw deny 22/tcp
+- List rules: sudo ufw status numbered
+- Delete rule: sudo ufw delete <rule_number>
+- Outcome: Linux users can manage traffic with different utilities depending on expertise.
+
+---
+
+## Tools Used
+
+- Windows Defender Firewall (GUI + Advanced Settings).
+- Linux Netfilter framework.
+- Utilities: iptables, nftables, firewalld, ufw.
+
+## Findings
+
+- Firewalls are essential for perimeter defense.
+- Windows and Linux provide built-in firewall solutions.
+- Rules define how traffic is handled, enabling tailored security.
+
+## Mitigation / Best Practices
+
+- Keep firewalls enabled by default.
+- Apply least privilege: deny by default, allow only necessary traffic.
+- Regularly audit firewall rules.
+- Monitor logs for anomalies.
+- Choose Linux firewall utility based on skill level.
+
+## Conclusion
+
+- Firewalls are critical for both Windows and Linux environments.
+- Windows Defender Firewall offers accessible GUI-based management.
+- Linux provides powerful command-line utilities.
+- Proper configuration ensures strong defense against unauthorized traffic.
