@@ -1,1 +1,99 @@
 # Room 47 CyberChef: The Basics
+
+## Task 1 Introduction
+
+Objective: Understand CyberChef’s role.
+- CyberChef = a web-based “Swiss Army knife” for data.
+- Performs operations from simple encodings (Base64, XOR) to complex cryptography (AES, RSA).
+- Operates on recipes: sequences of operations applied to input data.
+- Outcome: CyberChef simplifies data transformation and analysis in-browser.
+
+---
+
+## Task 2 Accessing the Tool
+
+Methods
+- Online Access: Use directly in a web browser.
+- Offline Copy: Download release file for Windows/Linux. Recommended to use stable versions.
+- Outcome: CyberChef is accessible both online and offline, ensuring flexibility.
+
+---
+
+## Task 3 Navigating the Interface
+
+CyberChef has four main areas:
+- Operations Area: Repository of all available operations (encoding, encryption, parsing).
+Examples: From Morse Code, URL Encode, To Base64, To Hex, ROT13.
+- Recipe Area: Heart of CyberChef. Drag operations, set arguments/options.
+- Features: Save, Load, Clear recipes.
+- BAKE! button executes recipe; Auto Bake runs automatically.
+- Input Area: Paste, type, or upload text/files.
+- Features: add new input tabs, upload folders/files, clear input/output.
+- Output Area: Displays processed results.
+- Features: save output to file, copy to clipboard, replace input with output.
+- Outcome: CyberChef’s interface is intuitive, modular, and designed for flexible workflows.
+
+---
+
+## Task 4 Before Anything Else (Thought Process)
+
+Steps:
+- Set a clear objective: Define what you want to achieve (e.g., decode a gibberish string).
+- Input data: Paste/upload the suspicious string or file.
+- Select operations: Choose relevant transformations (e.g., ROT13, Base64, Hex).
+- Check output: Verify if the result meets the objective. If not, repeat process.
+- Outcome: CyberChef encourages a systematic approach: define → input → transform → verify.
+
+---
+
+## Task 5 Practice, Practice, Practice
+
+Objective: Reinforce skills with exercises.
+- Download task files and use CyberChef to analyze them.
+- Apply operations from categories like Extractors (IP addresses, URLs, emails), 
+- Date/Time (UNIX timestamp conversions), and Data Format (Base64, Base85, Base58, Base62).
+- Example: encoding “THM” into Base64 manually results in VEhN.
+- URL Decode converts percent-encoded characters (e.g., %3A → :).
+- Outcome: Hands-on practice builds familiarity with CyberChef’s diverse operations.
+
+---
+
+## Task 6 Your First Official Cook
+
+Objective: Apply CyberChef in a real scenario.
+- Use Extractors to pull IPs, URLs, and emails from input data.
+- Convert timestamps between UNIX and human-readable formats.
+- Decode/encode data using Base64, Base85, Base58, Base62.
+- Practical exercise: upload/download files, process them with recipes, and validate outputs.
+ Outcome: First full “cook” demonstrates CyberChef’s power in real-world investigations.
+
+---
+
+## Tools Used
+
+- CyberChef web interface (online/offline).
+- Operations: encoding, decoding, encryption, parsing, extraction.
+- Recipes for chaining multiple operations.
+
+## Findings
+
+- CyberChef is versatile, combining multiple tools into one interface.
+- Recipes allow automation of complex transformations.
+- Input/output handling is user-friendly.
+- Structured thought process ensures efficient problem-solving.
+- Practical labs reinforce encoding/decoding, extraction, and recipe creation skills.
+
+## Mitigation / Best Practices
+
+- Always define objectives before experimenting.
+- Use Auto Bake for iterative testing.
+- Save recipes for reuse in investigations.
+- Validate outputs carefully to avoid false assumptions.
+- Keep offline copy for environments without internet access.
+
+## Conclusion
+
+- CyberChef is a powerful, flexible tool for data analysis and transformation.
+- Its modular interface (Operations, Recipe, Input, Output) supports diverse workflows.
+- Structured thought process ensures effective use in cybersecurity investigations.
+- Practical exercises strengthen encoding/decoding, extraction, and recipe creation skills.
