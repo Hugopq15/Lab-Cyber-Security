@@ -1,1 +1,95 @@
 # Room 50 FlareVM: Arsenal of Tools
+
+## Task 1 Introduction
+
+- FlareVM (Forensics, Logic Analysis, and Reverse Engineering) is a Windows-based virtual machine toolkit 
+created by FireEye’s FLARE team.
+- Designed for reverse engineers, malware analysts, 
+- incident responders, forensic investigators, and penetration testers.
+- Provides a curated collection of specialized tools for analyzing malware, executables, and suspicious processes.
+Learning Objectives:
+- Explore tools inside FlareVM.
+- Learn how to analyze malicious processes.
+- Use tools for static analysis of documents and binaries.
+- VM Access: Preconfigured lab machine with malicious samples (isolated, no internet).
+
+---
+
+## Task 2 Arsenal of Tools
+
+- FlareVM includes a wide range of categories of tools:
+- Reverse Engineering & Debugging: Ghidra, x64dbg, OllyDbg, Radare2, Binary Ninja, PEiD.
+- Disassemblers & Decompilers: CFF Explorer, Hopper, RetDec.
+- Static & Dynamic Analysis: Process Hacker, PEview, Dependency Walker, DIE.
+- Forensics & Incident Response: Volatility, Rekall, FTK Imager.
+- Network Analysis: Wireshark, Nmap, Netcat.
+- File Analysis: FileInsight, Hex Fiend, HxD.
+- Scripting & Automation: Python, PowerShell Empire.
+- Sysinternals Suite: Autoruns, Process Explorer, Process Monitor.
+- Finding: FlareVM consolidates dozens of specialized tools into one environment, saving analysts time compared to manual installation.
+
+---
+
+## Task 3 Commonly Used Tools for Investigation
+
+Focus on core investigative tools:
+- Procmon (Process Monitor): Tracks system activity (file system, registry, processes). 
+- Useful for detecting credential dumping attempts on LSASS.
+- Process Explorer: Shows parent-child process relationships, DLLs, and paths. Detects suspicious process spawning.
+- HxD: Hex editor for binary-level analysis. Identifies file types (e.g., MZ header for executables).
+- CFF Explorer: Generates file hashes, inspects PE metadata, detects tampered files.
+ -Wireshark: Captures and analyzes network traffic. Detects suspicious encrypted connections (TLS, TCP).
+- PEStudio: Static analysis of executables without execution. Identifies entropy, imports, suspicious indicators.
+ -FLOSS: Extracts and de-obfuscates strings from binaries. Reveals hidden URLs, API calls, registry keys, configs.
+ -Finding: These tools form the core arsenal for malware analysts, covering process monitoring, file inspection, network traffic, static analysis, and string extraction.
+
+---
+
+## Task 4 Analyzing Malicious Files
+
+Case Study: windows.exe
+PEStudio:
+- Hashes: MD5 9FDD4767DE5AEC8E577C1916ECC3E1D6, SHA-1 A1BC55A7931BFCD24651357829C460FD3DC4828F.
+- Metadata impersonates REGEDIT, but location is suspicious.
+- Russian text in version field → suspicious if not expected.
+- Absence of rich header → possible packing/obfuscation.
+- Imported APIs: set_UseShellExecute (spawns processes), CryptoStream, RijndaelManaged (AES cryptography).
+- FLOSS: Extracted static strings matched APIs seen in PEStudio.
+- Confirms cryptographic and execution-related functions.
+- Case Study: cobaltstrike.exe
+- Process Explorer: Parent process Explorer.exe, child cobaltstrike.exe. TCP/IP tab shows outbound connectivity.
+- Process Monitor: Filtered logs confirm connection to IP 47.120.46.210 (likely C2 server).
+- -Finding: windows.exe shows indicators of obfuscation, cryptographic use, and impersonation of REGEDIT. cobaltstrike.exe confirmed to establish outbound connection to a suspicious IP.
+
+---
+
+## Tools Used
+
+- PEStudio – static analysis of PE files (hashes, metadata, imports).
+- FLOSS – string extraction and de-obfuscation.
+- Process Explorer – parent-child process relationships, TCP/IP connectivity.
+- Process Monitor (Procmon) – detailed process activity logs, filtering for suspicious binaries.
+- HxD, Wireshark, CFF Explorer – supporting tools for file and network analysis.
+
+## Findings
+
+- FlareVM provides a complete toolkit for malware analysis.
+- Tasks 1–4 demonstrate workflows: static analysis, string extraction, process monitoring, 
+- and network traffic inspection.
+- Analysts can detect obfuscation, cryptographic use, impersonation, and C2 communication.
+- Using multiple tools ensures cross-validation of findings.
+
+## Mitigation / Best Practices
+
+ -Verify file hashes against threat intelligence databases (e.g., VirusTotal).
+- Treat executables with suspicious metadata or obfuscation as potential malware.
+- Monitor outbound connections for unknown IPs.
+- Use multiple tools (PEStudio, FLOSS, Procmon, Procexp) to validate results.
+- Conduct analysis only in isolated environments (FlareVM).
+
+## Conclusion
+
+- FlareVM is a comprehensive toolkit for malware analysts and forensic investigators.
+- Provides curated tools across reverse engineering, debugging, forensics, network analysis, and automation.
+- Essential for incident response workflows and malware research.
+- Tasks 1–4 show how FlareVM enables analysts to perform multi-layered investigations safely and effectively.
