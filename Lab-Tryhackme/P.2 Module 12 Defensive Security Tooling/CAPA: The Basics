@@ -1,1 +1,106 @@
 # Room 48 CAPA: The Basics
+
+## Task 1 Introduction
+
+CAPA (Common Analysis Platform for Artifacts) is a tool by FireEye Mandiant.
+- Identifies capabilities in executables (PE, ELF, .NET, shellcode, sandbox reports).
+- Uses rules to detect behaviors: network communication, file manipulation, process injection, persistence.
+- Encapsulates reverse engineering knowledge into automated analysis.
+- Useful for malware analysis, threat hunting, and incident response.
+
+---
+
+## Task 2 Tool Overview: How CAPA Works
+
+- Run CAPA via PowerShell: capa.exe <binary>.
+- Options: -v (verbose), -vv (very verbose).
+- Sample output (cryptbot.bin): hashes, OS, format, architecture, path.
+- Detected capabilities: Defense Evasion, Discovery, Execution, Impact, Persistence.
+- MAEC category: Launcher.
+- MBC behaviors: obfuscation, HTTP communication, file system actions, memory allocation, process creation.
+
+---
+
+## Task 3 Dissecting CAPA Results Part 1: General Information, MITRE and MAEC
+
+- General Info: Hashes, OS, format, architecture, path.
+- MITRE ATT&CK Mapping: Defense Evasion (T1027, T1027.005, T1497.001), Discovery (T1083), 
+- Execution (T1059.001, T1129), Impact (T1496), Persistence (T1053.002, T1053.005).
+- MAEC: Category “Launcher” → dropping payloads, persistence, C2 communication, executing functions.
+- Downloader value → fetching payloads, updates, configs.
+
+---
+
+## Task 4 Dissecting CAPA Results Part 2: Malware Behavior Catalogue (MBC)
+
+- MBC: Catalogue of malware objectives and behaviors, complements MITRE ATT&CK.
+- Objectives: Anti-Behavioral Analysis, Anti-Static Analysis, Collection, C2, Credential Access, 
+- Defense Evasion, Discovery, Execution, Exfiltration, Impact, Lateral Movement, Persistence, Privilege Escalation.
+- Micro-Objectives: PROCESS, MEMORY, COMMUNICATION, DATA.
+- Behaviors: Lab Machine Detection [B0009], 
+Executable Code Obfuscation [B0032], Command Interpreter [E1059], File Discovery [E1083], Obfuscated Files [E1027].
+- Micro-Behaviors: Allocate Memory [C0007], Create Process [C0017], HTTP Communication [C0002], Check String [C0019], 
+Encode Data [C0026], File system actions (create, delete, read, write).
+
+---
+
+## Task 5 Dissecting CAPA Results Part 3: Namespaces
+
+CAPA groups rules by Namespaces.
+- Top-Level Namespaces (TLN): Anti-Analysis, Collection, Communication, Compiler, Data-Manipulation, 
+- Executable, Host-Interaction, Impact, Linking, Load-Code, Persistence, Runtime, Targeting.
+Example: reference anti-VM strings::Anti-Analysis/anti-vm/vm-detection.
+- Rules are YAML files; capability names match rule names.
+- Exceptions: some rules (e.g., cryptocurrency strings) are under Nursery TLN (staging ground for unpolished rules).
+
+---
+
+## Task 6 Dissecting CAPA Results Part 4: Capability
+
+Capabilities: Specific behaviors identified by CAPA rules.
+Examples:
+- reference anti-VM strings → Anti-Analysis / anti-vm/vm-detection.
+- schedule task via schtasks → Persistence / scheduled-tasks.
+- reference Base64 string → Data-Manipulation / encoding/base64.
+- Each capability links to a YAML rule file.
+- Capabilities show what malware can do (e.g., encode data, evade detection, maintain persistence).
+
+---
+
+## Task 7 More Information, More Fun!
+
+Use -vv (very verbose) for detailed results.
+Output can be redirected to JSON: capa.exe -j -vv cryptbot.bin > cryptbot_vv.json.
+CAPA Web Explorer: Upload JSON to visualize results.
+Shows which strings or features triggered rules.
+Example:
+- Anti-VM strings rule → regex /VMWare/i.
+- Scheduled task rule → regex /schtasks/i and /\/create /i.
+- Explorer provides filtering, global search, and easier navigation compared to raw text.
+
+--- 
+
+## Findings
+
+- CAPA automates reverse engineering knowledge.
+- Provides structured output aligned with MITRE ATT&CK, MAEC, and MBC.
+- Detects obfuscation, persistence, execution, and communication behaviors.
+- Namespaces and capabilities organize rules for clarity.
+- Verbose mode + Web Explorer reveal exact rule matches.
+
+## Mitigation / Best Practices
+
+- Use CAPA in isolated environments (sandbox/VM).
+- Run with verbose options for deeper insights.
+- Cross-reference CAPA results with MITRE ATT&CK for incident response.
+- Use MAEC/MBC mappings for malware categorization.
+- Integrate CAPA into threat hunting workflows.
+- Use CAPA Web Explorer for easier analysis of verbose outputs.
+
+## Conclusion
+
+- CAPA is a powerful static analysis tool for malware capabilities.
+- Maps behaviors to MITRE ATT&CK, MAEC, and MBC frameworks.
+- Helps analysts quickly understand malicious binaries.
+- Verbose mode and Web Explorer enhance rule transparency.
+- Essential for incident response and defensive security.
