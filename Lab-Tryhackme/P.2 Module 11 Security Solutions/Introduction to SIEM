@@ -1,1 +1,119 @@
 # Room 43 Introduction to SIEM
+
+## Task 1 Introduction
+
+Objective: Understand SIEM’s role in a SOC.
+- SIEM = Security Information and Event Management.
+- Collects, normalizes, and correlates logs from multiple devices.
+- Provides centralized visibility for analysts.
+Learning Objectives:
+- Identify log sources.
+- Recognize limitations of isolated logs.
+- Explore SIEM features.
+- Learn ingestion methods.
+- Understand alerting and analysis.
+
+---
+
+## Task 2 Logs Everywhere, Answers Nowhere
+
+Objective: Identify log sources and challenges.
+Host-Centric Logs: Windows/Linux endpoints, servers. 
+- Examples: file access, authentication attempts, process execution, registry changes, PowerShell activity.
+Network-Centric Logs: Firewalls, IDS/IPS, routers. Examples: SSH, FTP, web traffic, VPN, file sharing.
+Challenges:
+- Numerous sources generating thousands of events per second.
+- No centralization → logs scattered across devices.
+- Limited context → individual logs may look harmless, but correlation reveals attacks.
+- Limited analysis → humans cannot manually process all logs.
+- Format issues → logs differ across platforms.
+- Outcome: Need for centralized SIEM.
+
+---
+
+## Task 3 Why SIEM?
+
+Objective: Show how SIEM solves log challenges.
+Features:
+- Centralized Collection: Agents/APIs pull logs into one platform.
+- Normalization: Converts diverse formats into consistent fields.
+- Correlation: Links events to reveal attack chains (e.g., VPN login + PowerShell + outbound traffic = possible exfiltration).
+- Real-time Alerting: Rules trigger alerts for analysts.
+Dashboards & Reporting: Visual insights, compliance evidence.
+- Outcome: Efficient detection, correlation, and response.
+
+---
+
+## Task 4 Log Sources and Ingestion
+
+Objective: Understand log sources and ingestion methods.
+Windows: Event Viewer with unique IDs.
+- Linux: /var/log/httpd, /var/log/cron, /var/log/auth.log, /var/log/kern.
+- Web Server: Apache logs in /var/log/apache or /var/log/httpd.
+Ingestion Methods:
+- Agent/Forwarder (Splunk Forwarder).
+- Syslog protocol.
+- Manual upload (offline data).
+- Port-forwarding.
+- Outcome: Logs centralized and standardized for monitoring.
+
+---
+
+## Task 5 Alerting Process and Analysis
+
+Objective: Learn detection rules and investigation.
+Detection Rules Examples:
+- 5 failed logins in 10 seconds → Multiple Failed Login Attempts.
+- Successful login after failures → Suspicious Login.
+- USB insertion → Alert if restricted.
+- Outbound traffic > 25 MB → Possible exfiltration.
+Use Cases:
+- Event ID 104 → Event Log Cleared.
+- Event ID 4688 + “whoami” → Privilege escalation attempt.
+Alert Investigation:
+- Analysts review dashboards.
+- Determine True/False positives.
+- Actions: tune rules, investigate, contact asset owners, isolate hosts, block IPs.
+- Outcome: Timely detection and containment.
+
+---
+
+## Task 6 Lab Work
+
+Objective: Apply SIEM concepts in practice.
+- Use lab dashboard to observe events.
+- Identify suspicious activity when alerts trigger.
+- Answer lab questions based on correlation and rules.
+- Outcome: Hands-on reinforcement of SIEM workflows.
+
+---
+
+## Tools Used
+
+- Event Viewer (Windows).
+- /var/log/ directories (Linux).
+- Apache logs (Web server).
+- -SIEM ingestion methods (Agents, Syslog, Upload, Port-forwarding).
+- Detection rules and dashboards.
+
+## Findings
+
+- Logs are valuable but scattered.
+- SIEM centralizes, normalizes, and correlates logs.
+- Detection rules reveal hidden threats.
+- Analysts must investigate alerts carefully.
+
+## Mitigation / Best Practices
+
+- Deploy SIEM for centralized log management.
+- Continuously monitor and correlate logs.
+- Create precise detection rules to reduce false positives.
+- Use dashboards for visibility.
+- Train analysts to interpret alerts.
+
+## Conclusion
+
+- SIEM is essential for SOC operations.
+- It solves challenges of scattered logs.
+- Provides correlation, real-time alerting, dashboards, and compliance.
+- Strengthens defensive security with proactive detection and response.
