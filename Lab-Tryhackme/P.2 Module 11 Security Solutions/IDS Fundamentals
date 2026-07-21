@@ -1,1 +1,112 @@
 # Room 45 IDS Fundamentals
+
+## Task 1 What Is an IDS
+
+Objective: Understand IDS role in security.
+- Firewalls block traffic at the boundary; IDS detects malicious activity inside the network.
+- IDS acts like surveillance cameras: monitors traffic, detects anomalies, and alerts administrators.
+- IDS does not block traffic; it only generates alerts.
+- Outcome: IDS provides visibility into suspicious activity beyond firewall protections.
+
+---
+
+## Task 2 Types of IDS
+
+Deployment Modes:
+- HIDS (Host IDS): Installed on individual hosts, monitors local activity.
+- NIDS (Network IDS): Monitors traffic across the entire network, centralized detection.
+Detection Modes:
+- Signature-Based IDS: Detects known threats using stored attack patterns. Cannot detect zero-day attacks.
+- Anomaly-Based IDS: Learns baseline behavior and detects deviations. Can detect zero-day attacks but prone to false positives.
+- Hybrid IDS: Combines both methods for balanced detection.
+- Outcome: Different IDS types provide complementary strengths; hybrid systems are increasingly common.
+
+---
+
+## Task 3 IDS Example: Snort
+
+Overview:
+- Open-source IDS developed in 1998.
+- Uses signature-based and anomaly-based detection.
+- Built-in rule files detect known threats; custom rules can be created.
+Modes:
+- Packet Sniffer Mode: Reads and displays packets without analysis.
+- Packet Logging Mode: Logs traffic as PCAP files for forensic analysis.
+- NIDS Mode: Monitors traffic in real-time, applies rules, and generates alerts.
+- Outcome: Snort is versatile, widely used, and adaptable to different monitoring needs.
+
+---
+
+## Task 4 Snort Usage
+
+Setup:
+- Configuration files in /etc/snort.
+Key file: snort.lua defines network ranges, enabled rules, and settings.
+Rule Format Components:
+- Action, Protocol, Source/Destination IPs and Ports, Metadata (msg, sid, rev).
+Sample Rule:
+bash
+- alert icmp any any -> 127.0.0.1 any (msg:"Loopback Ping Detected"; sid:10003; rev:1;)
+Testing:
+- Add rule to local.rules.
+- Run Snort with sudo snort -q -l /var/log/snort -i lo -A alert_fast -c /etc/snort/snort.lua.
+- Ping loopback address → Snort generates alerts.
+PCAP Analysis:
+- Snort can analyze historical traffic in PCAP files.
+Command:
+bash
+- sudo snort -q -l /var/log/snort -r Intro_to_IDS.pcap -A alert_fast -c /etc/snort/snort.lua
+- Outcome: Snort detects intrusions in real-time and forensic scenarios.
+
+---
+
+## Task 5 Practical Lab
+
+Scenario:
+- Forensic investigator analyzing Intro_to_IDS.pcap.
+- Run Snort on the PCAP file to generate alerts.
+- Alerts reveal attack type, source/destination IPs, ports, and protocols.
+- Outcome: PCAP analysis enables reconstruction of attack timelines and identification of compromised systems.
+
+---
+
+## Task 6 Lab Work / Conclusion
+
+Objective: Apply IDS concepts in a lab environment.
+- Use Snort to detect suspicious traffic.
+- Create and test custom rules.
+- Analyze PCAP files for forensic investigation.
+- Outcome: Hands-on practice reinforces IDS concepts, rule creation, and forensic analysis.
+
+--- 
+
+## Tools Used
+
+- Snort IDS (snort.lua, rule files).
+- Custom rules in local.rules.
+- PCAP files for forensic analysis.
+- Host IDS (OSSEC, Wazuh).
+- Network IDS (Snort, Suricata).
+
+## Findings
+
+- IDS complements firewalls by detecting malicious activity inside networks.
+- Signature-based IDS is efficient but limited to known threats.
+- Anomaly-based IDS detects zero-day attacks but requires fine-tuning.
+- Snort provides flexible detection through custom rules and PCAP analysis.
+
+## Mitigation / Best Practices
+
+- Deploy IDS alongside firewalls for layered defense.
+- Regularly update signature databases.
+- Fine-tune anomaly detection to reduce false positives.
+- Use hybrid IDS for balanced detection.
+- Log and analyze traffic for forensic investigations.
+
+## Conclusion
+
+- IDS is critical for detecting threats that bypass firewalls.
+- Different deployment and detection modes serve different needs.
+- Snort is a powerful open-source IDS with customizable rules.
+- IDS alerts guide administrators in responding to suspicious activity.
+- Practical labs strengthen understanding of IDS operations.
