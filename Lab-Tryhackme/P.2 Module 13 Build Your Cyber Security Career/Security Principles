@@ -1,1 +1,138 @@
 # Room 51 Security Principles
+
+## Task 1 Introduction
+
+- Security protects assets against adversaries; the level of protection depends on the adversary.
+- Perfect security is impossible; the goal is to strengthen posture and make attacks harder.
+- Objectives: CIA Triad, DAD Triad, security models, principles (Defense-in-Depth, Zero Trust, Trust but Verify), ISO/IEC 19249, and definitions of vulnerability, threat, and risk.
+
+---
+
+## Task 2 CIA Triad
+
+- Confidentiality: Only authorized parties access data.
+- Integrity: Data must not be altered without detection.
+- Availability: Systems/services must be accessible when needed.
+- Beyond CIA: Authenticity (data is genuine) and Nonrepudiation (source cannot deny).
+- Parkerian Hexad: Expands CIA to six elements: Availability, Utility, Integrity, Authenticity, Confidentiality, Possession.
+
+---
+
+## Task 3 DAD Triad
+
+- Disclosure: Attack on confidentiality.
+- Alteration: Attack on integrity.
+- Destruction/Denial: Attack on availability.
+- Balance is critical: overprotecting one function can weaken others.
+
+---
+
+## Task 4 Security Models
+
+Bell-LaPadula (Confidentiality):
+- No read up (lower subjects cannot read higher objects).
+- No write down (higher subjects cannot write to lower objects).
+Summary: write up, read down.
+Biba (Integrity):
+- No read down (higher integrity subjects cannot read lower objects).
+- No write up (lower integrity subjects cannot write to higher objects).
+Summary: read up, write down.
+- Clark-Wilson (Integrity):
+- Constrained Data Items (CDIs), Unconstrained Data Items (UDIs).
+- Transformation Procedures (TPs) maintain integrity.
+- Integrity Verification Procedures (IVPs) validate CDIs.
+- Other models: Brewer-Nash, Goguen-Meseguer, Sutherland, Graham-Denning, Harrison-Ruzzo-Ullman.
+
+---
+
+## Task 5 Defence-in-Depth
+
+Multi-layered security approach.
+- Analogy: locked drawer → locked room → locked apartment → locked building → cameras.
+- Each layer slows attackers and reduces risk.
+
+---
+
+## Task 6 ISO/IEC 19249
+
+Architectural Principles:
+- Domain Separation – group related components into domains with security attributes.
+- Layering – impose policies at multiple levels (e.g., OSI model).
+- Encapsulation – hide low-level implementations, enforce controlled access.
+- Redundancy – ensure availability/integrity (e.g., RAID, dual power supplies).
+- Virtualization – sandboxing, secure detonation, resource isolation.
+Design Principles:
+- Least Privilege – grant only necessary permissions.
+- Attack Surface Minimisation – disable unnecessary services.
+- Centralized Parameter Validation – validate inputs centrally.
+- Centralized Security Services – centralize authentication/security functions.
+- Error & Exception Handling – fail safe, avoid information leakage.
+
+---
+
+## Task 7 Zero Trust vs. Trust but Verify
+
+Trust but Verify:
+Trust entities but always verify actions.
+Requires logging, monitoring, IDS/IPS, proxies.
+Automated mechanisms essential.
+Zero Trust:
+- Treats trust as a vulnerability.
+- Principle: never trust, always verify.
+- Every entity is adversarial until proven otherwise.
+- Requires authentication/authorization for all resources.
+- Uses microsegmentation (network segments as small as a single host).
+- Limits damage if breaches occur.
+- Balance: Zero Trust must be applied carefully to avoid harming business operations.
+
+---
+
+## Task 8 Vulnerability, Threat, Risk
+
+- Vulnerability: Weakness susceptible to attack.
+- Threat: Potential danger exploiting a vulnerability.
+- Risk: Likelihood of exploitation + impact on business.
+- Example (physical): Glass showroom → vulnerability (glass), threat (breakage), risk (likelihood + impact).
+- Example (IT): Hospital database → vulnerability (software flaw), threat (exploit code released), risk (likelihood of attack + impact on patient data).
+
+---
+
+## Tools Used
+
+- CIA Triad – foundational model.
+- DAD Triad – adversarial counterpart.
+- Authenticity & Nonrepudiation – trust and accountability.
+- Parkerian Hexad – expanded security model.
+- Bell-LaPadula, Biba, Clark-Wilson Models – formal frameworks for confidentiality and integrity.
+- Defense-in-Depth – layered security principle.
+- ISO/IEC 19249 – international standard for secure design principles.
+- Zero Trust & Trust but Verify – modern trust principles.
+- Vulnerability, Threat, Risk – foundational risk assessment concepts.
+
+## Findings
+
+- CIA defines security goals; DAD defines threats.
+- Security models formalize enforcement of confidentiality and integrity.
+- Defense-in-Depth and ISO/IEC 19249 provide layered and standardized approaches.
+- Zero Trust and Trust but Verify modernize trust management.
+- Vulnerability, threat, and risk clarify the language of security.
+- Balance is essential across all principles.
+
+## Mitigation / Best Practices
+
+- Apply Defense-in-Depth (multi-layered security).
+- Implement Zero Trust where feasible.
+- Use authenticity and nonrepudiation mechanisms (digital signatures, certificates).
+- Protect possession and utility of data (backups, encryption key management).
+- Continuously assess vulnerabilities, threats, and risks.
+
+## Conclusion
+
+- Security principles provide a structured foundation for protecting assets.
+- CIA/DAD triads define goals and threats.
+- Security models (Bell-LaPadula, Biba, Clark-Wilson) enforce confidentiality and integrity.
+- Defense-in-Depth and ISO/IEC 19249 strengthen architecture and design.
+- Zero Trust and Trust but Verify modernize trust management.
+- Vulnerability, threat, and risk define the language of risk assessment.
+
+Together, these principles underpin modern frameworks, standards, and incident response strategies.
