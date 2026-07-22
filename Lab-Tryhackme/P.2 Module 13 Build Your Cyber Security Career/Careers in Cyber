@@ -1,1 +1,80 @@
 # Room 52 Careers in Cyber
+
+## Task 1 Introduction
+
+- Cybersecurity offers diverse career paths: offensive security (breaking into systems) and defensive security (protecting organisations).
+- No specific background required; curiosity, problem-solving, and analytical thinking are key.
+- Why pursue a career in cyber:
+- High demand: over 3.5 million unfilled roles globally.
+- Strong salaries, even at entry level.
+- Constant learning: the field evolves rapidly.
+
+---
+
+## Task 2 Security Analysis (Defensive Role)
+
+- Profile: Detail-focused, curious, puzzle-solver.
+- Role: Digital defenders (blue team). Monitor, investigate, and respond to suspicious activity.
+Typical tasks:
+- Monitor devices and networks.
+- Investigate unusual activity (e.g., logins from unexpected locations).
+- Piece together alerts to determine incidents.
+- Collaborate with other teams to improve defences.
+Progression: Entry-level defensive role → specialisations in threat hunting, incident response, malware analysis.
+
+---
+
+## Task 3 Security Engineering (Defensive Role)
+
+- Profile: Problem-solver, builder.
+- Role: Architects of cybersecurity. Build and maintain systems that protect networks and devices.
+Typical tasks:
+- Design and maintain security systems (e.g., IDS).
+- Stay updated on hacker techniques.
+- Document processes and assess risks.
+- Ensure applications are protected against vulnerabilities.
+Progression: Specialise further in application security, cloud security. Skills also transfer to offensive security.
+
+---
+
+## Task 4 Penetration Testing (Offensive Role)
+
+- Profile: Methodical, curious.
+- Role: Ethical hackers (pentesters). Test systems by safely attempting to exploit vulnerabilities.
+Typical tasks:
+- Test security of systems, networks, websites.
+- Perform audits and assessments.
+- Analyse results, create reports, advise on remediation.
+Progression: Specialise in network/web application testing → advance to red teaming (simulate full-scale attacks, including physical intrusion).
+
+---
+
+## Tools Used
+
+- Security Analysis: SIEM platforms, IDS/IPS, log management tools.
+- Security Engineering: IDS/IPS, firewalls, vulnerability scanners, secure architecture frameworks.
+- Penetration Testing: Kali Linux, Metasploit, Burp Suite, Nmap, Wireshark.
+- General Career Resources: TryHackMe labs, GitHub repositories, industry certifications (CompTIA Security+, CEH, OSCP).
+
+## Findings
+
+- Cybersecurity careers are diverse, with clear paths for both defensive and offensive roles.
+- Security Analysts are in highest demand, offering strong entry-level opportunities.
+- Security Engineers design and maintain protective systems, bridging defensive and offensive skills.
+- Penetration Testers simulate attacks to identify vulnerabilities before adversaries exploit them.
+- Each role offers progression into specialised or advanced areas.
+
+## Mitigation / Best Practices
+
+- Build foundational knowledge in networking, operating systems, and security principles.
+- Gain hands-on experience through labs (e.g., TryHackMe, HackTheBox).
+- Pursue certifications aligned with career goals (Security+, CySA+, OSCP, CISSP).
+- Develop both technical skills (tools, coding, analysis) and soft skills (communication, teamwork).
+- Stay updated on evolving threats and technologies.
+
+## Conclusion
+
+- Cybersecurity careers are accessible, rewarding, and future-proof.
+- Roles like Security Analyst, Security Engineer, and Penetration Tester provide clear entry points and progression paths.
+- The field offers high demand, strong salaries, and continuous learning opportunities
+- Choosing between offensive and defensive paths depends on personal strengths (problem-solving, curiosity, building, or breaking).
