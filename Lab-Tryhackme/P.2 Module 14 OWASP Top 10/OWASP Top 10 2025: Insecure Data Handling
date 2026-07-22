@@ -1,1 +1,96 @@
 # Room 56 OWASP Top 10 2025: Insecure Data Handling
+
+## Task 1 Introduction
+
+Focus: vulnerabilities in application behaviour and user input.
+Categories covered:
+- A04: Cryptographic Failures
+- A05: Injection
+- A08: Software or Data Integrity Failures
+- Labs simulate exploitation scenarios (weak crypto, injection, deserialization).
+
+---
+
+## Task 2 A04: Cryptographic Failures
+
+Definition: Sensitive data not adequately protected due to weak or incorrect encryption.
+Examples:
+- Storing passwords without hashing.
+- Using weak algorithms (MD5, SHA1, DES).
+- Hard-coded keys in code/config.
+- Rolling custom cryptography instead of vetted libraries.
+Impact: Exposes passwords, tokens, personal data; enables account takeover.
+Prevention:
+- Use strong algorithms (AES-GCM, bcrypt, scrypt, Argon2).
+- Rely on trusted crypto libraries.
+- Secure key management systems (AWS KMS, Azure Key Vault).
+- Never embed credentials in code or repos.
+- Practical: Weak shared key in a note-sharing service → decrypt notes to retrieve flag.
+
+---
+
+## Task 3 A05: Injection
+
+Definition: Application mishandles user input, passing it directly into commands or queries.
+Examples:
+- SQL Injection.
+- Command Injection.
+- Server-Side Template Injection (SSTI).
+- AI Prompt Injection.
+Impact: Attackers execute arbitrary queries/commands, exfiltrate data, or hijack logic.
+Prevention:
+- Treat all user input as untrusted.
+- Use prepared statements/parameterised queries.
+- Avoid unsafe shell functions; use safe APIs.
+- Input validation and sanitisation (escape dangerous characters, enforce data types).
+- Practical: SSTI exploitation to retrieve flag from host machine.
+
+---
+
+## Task 4 A08: Software or Data Integrity Failures
+
+Definition: Application trusts code, updates, or data without verifying authenticity/integrity.
+Examples:
+- Trusting unverified software updates.
+- Loading scripts/configs from untrusted sources.
+- Accepting altered binaries, templates, or JSON files.
+- Impact: Attackers inject malicious code or tamper with logic/data.
+Prevention:
+- Establish trust boundaries.
+- Verify updates with cryptographic checksums/signatures.
+- Ensure only trusted sources modify critical artefacts.
+- Secure CI/CD pipelines against tampering.
+- Practical: Python deserialization attack → inject malicious input to exploit application.
+
+---
+
+## Tools Used
+
+- OWASP Top 10 2025 Framework – categorisation of web app risks.
+- Crypto Tools: OpenSSL, HashiCorp Vault, AWS KMS.
+- Injection Testing Tools: Burp Suite, OWASP ZAP, SQLMap, custom fuzzers.
+- Integrity Tools: Dependency-Check, Snyk, checksum/signature verification.
+- CI/CD Security: GitHub Actions hardening, Jenkins pipeline security.
+
+## Findings
+
+- Insecure data handling remains a core risk in modern applications.
+- Cryptographic failures → expose sensitive data.
+- Injection → direct exploitation of input handling.
+- Integrity failures → compromise through trusted but unverified components.
+- These categories highlight the need for secure coding, strong crypto, and verified supply chains.
+
+## Mitigation / Best Practices
+
+- Always hash and encrypt sensitive data with modern algorithms.
+- Treat all user input as untrusted; enforce validation and sanitisation.
+- Verify authenticity and integrity of updates, scripts, and data.
+- Harden CI/CD pipelines and monitor dependencies.
+- Apply Defense-in-Depth: multiple layers of crypto, validation, and integrity checks.
+
+## Conclusion
+
+- OWASP Top 10 2025 shows insecure data handling as a persistent and high-severity risk.
+- Cryptographic failures, injection, and integrity failures are interconnected: 
+-weak crypto exposes secrets, injection exploits input, and integrity failures compromise trusted components.
+- Secure applications require robust crypto, strict input handling, and verified supply chains.
