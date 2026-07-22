@@ -1,1 +1,95 @@
 # Room 54 OWASP Top 10 2025: IAAA Failures
+
+## Task 1 Introduction
+
+- Focuses on IAAA failures (Identity, Authentication, Authorisation, Accountability).
+Covers three OWASP Top 10 2025 categories:
+- A01: Broken Access Control
+ -A07: Authentication Failures
+- A09: Logging & Alerting Failures
+- Designed for beginners, with practical challenges to reinforce theory.
+
+---
+
+## Task 2 What is IAAA?
+
+- Identity: Unique account (user ID/email).
+- Authentication: Proving identity (passwords, OTP, passkeys).
+- Authorisation: What the identity is allowed to do.
+- Accountability: Recording and alerting on actions (who, when, where).
+ -Failures in IAAA can allow attackers to access other users’ data or escalate privileges.
+
+---
+
+## Task 3 A01: Broken Access Control
+
+Occurs when servers fail to enforce access rules on every request.
+- Example: IDOR (Insecure Direct Object Reference) – changing ?id=7 to ?id=6 reveals another user’s data.
+Leads to:
+- Horizontal privilege escalation: Accessing other users’ data at the same role level.
+- Vertical privilege escalation: Performing admin-only actions.
+- Root cause: application trusts the client too much.
+- Mitigation: Enforce server-side checks, use indirect references, validate permissions consistently.
+
+---
+
+## Task 4 A07: Authentication Failures
+
+Occurs when applications cannot reliably verify or bind user identity.
+Common issues:
+- Username enumeration.
+- Weak/guessable passwords (no lockout/rate limits).
+- Logic flaws in login/registration flows.
+- Insecure session/cookie handling.
+- Example: Registering aDmiN to bypass case-sensitive checks and hijack admin account.
+Mitigation: Strong password policies, rate limiting, secure session handling, consistent identity binding.
+
+---
+
+## Task 5 A09: Logging & Alerting Failures
+
+Without proper logging/alerting, defenders cannot detect or investigate attacks.
+Failures include:
+- Missing authentication events.
+- Vague error logs.
+- No alerts on brute-force or privilege changes.
+- Short retention or tamperable logs.
+- Logging underpins accountability (who did what, when, where).
+Mitigation:
+- Centralised logging with secure storage.
+- Alerts for suspicious events.
+- Adequate retention policies.
+- Protect logs from tampering.
+
+---
+
+## Tools Used
+
+- OWASP Top 10 2025 Framework – categorisation of web application risks.
+- IAAA Model – identity, authentication, authorisation, accountability.
+- Static/Dynamic Testing Tools: Burp Suite, OWASP ZAP (for IDOR, access control checks).
+- Authentication Testing Tools: Hydra, custom scripts (for brute force, enumeration).
+- Logging & Monitoring Tools: SIEM platforms, ELK stack, Splunk.
+
+## Findings
+
+- IAAA failures are critical attack vectors in modern applications.
+- Broken Access Control → data exposure and privilege escalation.
+- Authentication Failures → account takeover and impersonation.
+- Logging Failures → blind spots for defenders, delayed detection.
+- These categories highlight the importance of secure design + monitoring.
+
+## Mitigation / Best Practices
+
+- Enforce server-side access control checks.
+- Implement strong authentication mechanisms (MFA, lockouts, secure sessions).
+- Ensure robust logging and alerting for all security-relevant events.
+- Apply least privilege and Zero Trust principles.
+- Regularly test applications against OWASP Top 10 risks.
+
+## Conclusion
+
+- OWASP Top 10 2025 emphasises IAAA failures as major risks.
+- Broken Access Control, Authentication Failures, and Logging Failures are interconnected: weak identity/authentication allows access, poor logging hides the attack.
+- Secure applications require strong IAAA implementation and continuous monitoring.
+- These principles are foundational for modern web security and incident response.
