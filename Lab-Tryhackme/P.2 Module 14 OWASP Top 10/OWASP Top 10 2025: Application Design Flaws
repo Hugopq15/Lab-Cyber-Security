@@ -1,1 +1,102 @@
 # Room 55 OWASP Top 10 2025: Application Design Flaws
+
+## Task 1 Introduction
+
+- Focus: failures in architecture and system design.
+Categories covered:
+- AS02: Security Misconfigurations
+- AS03: Software Supply Chain Failures
+- AS04: Cryptographic Failures
+- AS06: Insecure Design
+- Labs simulate real-world scenarios to reinforce theory.
+
+---
+
+## Task 2 AS02: Security Misconfigurations
+
+- Definition: Unsafe defaults, incomplete settings, exposed services.
+- Impact: Easy entry points for attackers, privilege escalation, data exposure.
+- Example: Uber (2017) exposed AWS S3 bucket with sensitive data.
+- Common patterns: Default credentials, exposed endpoints, misconfigured cloud storage, verbose errors, outdated software, exposed AI endpoints.
+- Prevention: Harden configs, enforce least privilege, patch regularly, audit cloud setups, secure AI endpoints, integrate automated checks.
+
+---
+
+## Task 3 AS03: Software Supply Chain Failures
+
+- Definition: Weaknesses in third-party components, libraries, services, or models.
+- Impact: Compromised dependencies can compromise entire systems.
+- Example: SolarWinds Orion (2021) – malicious code inserted into trusted updates.
+- Common patterns: Unverified libraries, auto-updates without checks, insecure CI/CD pipelines, poor provenance tracking, unmonitored dependencies.
+- Prevention: Verify components, patch dependencies, sign and audit updates, secure CI/CD, track provenance, monitor runtime behaviour, integrate supply chain threat modelling.
+
+---
+
+## Task 4 AS04: Cryptographic Failures
+
+- Definition: Incorrect or missing use of encryption.
+- Impact: Exposes sensitive data, enables account takeover or breaches.
+- Common patterns: Deprecated algorithms (MD5, SHA-1), hard-coded secrets, 
+poor key rotation, lack of encryption, invalid TLS certificates, exposed AI secrets.
+- Prevention: Use strong algorithms (AES-GCM, TLS 1.3), secure key management (AWS KMS, Azure Key Vault), rotate keys, enforce crypto lifecycle policies, maintain inventories, protect AI models.
+
+---
+
+## Task 5 AS06: Insecure Design
+
+Definition: Flawed logic or architecture built into systems from the start. Cannot be patched—requires redesign.
+Impact: Built-in weaknesses undermine trust boundaries and workflows.
+- Example: Clubhouse – backend API lacked authentication, exposing private conversations.
+Common insecure designs (2025):
+- Weak business logic (approval/recovery flows).
+- Flawed assumptions about user/model behaviour.
+- AI components with unchecked authority.
+- Missing guardrails for LLMs/agents.
+- Debug bypasses left in production.
+- No abuse-case review or AI threat modelling.
+- AI-specific risks: Prompt injection, poisoned models, blind trust in outputs.
+Prevention:
+- Treat models as untrusted until validated.
+- Validate/filter inputs/outputs.
+- Separate system prompts from user content.
+- Protect sensitive data in prompts.
+- Require human review for high-risk AI actions.
+- Log provenance, monitor behaviour, apply privacy controls.
+- Build threat modelling into every stage.
+- Define clear security requirements before implementation.
+- Apply least privilege across APIs/services.
+- Continuously monitor/test for logic flaws and emergent risks.
+
+---
+
+## Tools Used
+
+- OWASP Top 10 2025 Framework – categorisation of web app risks.
+- Static/Dynamic Testing Tools: Burp Suite, OWASP ZAP, Nikto.
+- Cloud Security Tools: ScoutSuite, Prowler, AWS Config.
+- Supply Chain Tools: Dependency-Check, Snyk, GitHub Dependabot.
+- Cryptography Tools: OpenSSL, HashiCorp Vault, AWS KMS.
+- AI Threat Modelling: Red-teaming prompts, model provenance logging, adversarial testing.
+
+## Findings
+
+- Application design flaws are systemic weaknesses rather than coding bugs.
+- Misconfigurations, supply chain issues, crypto failures, and insecure design are among the most exploited categories.
+- AI introduces new insecure design risks (prompt injection, poisoned models, blind trust).
+- Prevention requires secure architecture, strong processes, and continuous monitoring.
+
+## Mitigation / Best Practices
+
+- Harden configurations and automate reviews.
+- Verify and monitor third-party dependencies.
+- Secure CI/CD pipelines against tampering.
+- Use modern cryptographic standards and proper key management.
+- Apply Defense-in-Depth and Zero Trust principles.
+- Integrate AI-specific threat modelling into design workflows.
+
+## Conclusion
+
+- OWASP Top 10 2025 highlights that design flaws are as dangerous as coding bugs.
+- Security misconfigurations, supply chain failures, cryptographic failures, and insecure design are critical risks.
+- Secure design requires holistic thinking: architecture, deployment, dependencies, cryptography, and AI must all be robust.
+- These categories remind us that security is not just about code—it’s about the entire ecosystem.
