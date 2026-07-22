@@ -1,1 +1,85 @@
 # Room 53 Training Impact on Teams
+
+## Task 1 Understanding the Impact of Training
+
+- Training is essential: nobody is born a cybersecurity expert; skills are built through practice.
+- Safe practice requires lab environments to avoid harming production systems.
+Benefits:
+- Prevention is cheaper than remediation.
+- Improves team quality and reduces incidents.
+- Increases capacity without hiring more staff.
+- Enables juniors to ramp up quickly.
+- Reduces repetitive training burden on seniors.
+- Creates a common baseline for skill assessment.
+- Fosters teamwork (e.g., Capture the Flag challenges).
+
+---
+
+## Task 2 Training for Large Organisations
+
+- Small teams → off-the-shelf training.
+- Large teams (>20 employees) or specific needs → customised training.
+- TryHackMe’s Content Studio allows tailoring modules.
+- Corporations require integration:
+- SSO (Single Sign-On).
+- APIs for seamless integration with existing systems.
+
+---
+
+## Task 3 Training Investment Proposal
+
+- Financial Case Example:
+- Team size: 10 employees.
+- Cost per employee: $80,000 annually.
+- Training productivity increase: 4%.
+- Savings: $32,000 (10 × 4% × $80,000).
+- Training cost: $5,000 (10 × $500).
+- ROI: 640% ($32,000 ÷ $5,000).
+- Proposal Writing:
+- Frame training as an investment in assets.
+- Show ROI with clear numbers.
+- Use structured proposals (e.g., TryHackMe templates).
+
+---
+
+## Task 4 Vendor Selection
+
+- Key questions for choosing a training vendor:
+- Who is the training for?
+ -What are the employees’ roles, backgrounds, and relevant topics?
+- Does the vendor have experience with similar organisations?
+- What is the breadth, depth, and quality of content?
+- Can users learn, train, and practice on a single platform?
+- Cost matters, but productivity gains outweigh training expenses.
+
+---
+
+## Tools Used
+
+- Training Platforms: TryHackMe, HackTheBox, Cyber Ranges.
+- Content Studio: for custom modules.
+- Integration Tools: SSO, APIs.
+- Proposal Templates: ROI calculators, structured business cases.
+- Team Exercises: Capture the Flag (CTF), labs, simulations.
+
+## Findings
+
+- Training is a strategic investment with measurable ROI.
+- Customisation and integration are critical for large organisations.
+- Vendor selection must align with employee roles and organisational needs.
+- Training builds both technical skills and team cohesion.
+
+## Mitigation / Best Practices
+
+- Establish centralised training programs for consistency.
+- Use ROI calculations to justify budgets.
+- Select vendors with proven experience and integration capabilities.
+- Balance off-the-shelf and customised training depending on team size.
+- Encourage gamified training (CTFs) to boost engagement.
+
+## Conclusion
+
+- Cybersecurity training strengthens teams, reduces incidents, and delivers high ROI.
+- It enables organisations to scale skills without scaling headcount.
+- Proper vendor selection ensures training is relevant, integrated, and effective.
+- Training is not just prevention—it’s a force multiplier for productivity and resilience.
