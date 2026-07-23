@@ -1,1 +1,21 @@
-Prueba prueba
+# MEOW - HackTheBox Starting Point
+
+## Scan
+- Ran Nmap against the target.
+- Found port **23/tcp** open.
+- Service identified: **Telnet**.
+
+## Access
+- Attempted login via Telnet.
+- User `root` accepted with a blank password.
+- Gained full system access.
+
+## Flag
+- Navigated to `/root/flag.txt`.
+- Retrieved the flag (not published here for HTB rules).
+
+## Lessons Learned
+- Telnet is insecure: credentials are transmitted in plaintext.
+- Default/blank passwords represent a critical misconfiguration.
+- Always replace Telnet with SSH for secure remote access.
+
