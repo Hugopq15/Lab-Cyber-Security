@@ -1,1 +1,22 @@
+# REDEEMER - HackTheBox Starting Point
 
+## Scan
+- Ran Nmap against the target.
+- Found port **6379/tcp** open.
+- Service identified: **Redis key-value store**.
+
+## Access
+- Connected to the Redis service using `redis-cli -h <IP>`.
+- Verified server information with `INFO`.
+- Confirmed Redis version: **5.0.7**.
+- Explored available databases with `SELECT` and listed keys using `KEYS *`.
+
+## Flag
+- Located the key named `flag`.
+- Retrieved its value with `GET flag`.
+- Obtained the flag (not published here for HTB rules).
+
+## Lessons Learned
+- Redis stores data in memory and can expose sensitive information if left unsecured.
+- Default configuration often allows unauthenticated access.
+- Always secure Redis with authentication and restrict network exposure to prevent unauthorized access.
