@@ -1,1 +1,22 @@
+# DANCING - HackTheBox Starting Point
 
+## Scan
+- Ran Nmap against the target.
+- Found port **445/tcp** open.
+- Service identified: **Microsoft-DS (SMB)**.
+
+## Access
+- Connected to the SMB service using `smbclient`.
+- Listed available shares (`-L` option).
+- Found the share **Users** accessible without authentication.
+- Connected to `Users` and navigated directories.
+
+## Flag
+- Located the file `flag.txt` inside the share.
+- Downloaded it with `get flag.txt`.
+- Retrieved the flag (not published here for HTB rules).
+
+## Lessons Learned
+- SMB shares can expose sensitive files if misconfigured.
+- Anonymous access to shares is a critical vulnerability.
+- Always restrict or disable guest/anonymous SMB access to prevent data leaks.
