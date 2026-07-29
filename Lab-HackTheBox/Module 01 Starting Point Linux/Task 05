@@ -1,0 +1,24 @@
+# APPOINTMENT - HackTheBox Starting Point
+
+## Scan
+- Ran Nmap against the target.
+- Found port **80/tcp** open.
+- Service identified: **HTTP web application**.
+
+## Access
+- Tried default login credentials (failed).
+- Tested login form for SQL Injection.
+- Input used: `admin'#` (username) with any password.
+- Query modified to bypass password check.
+- Successfully logged in as **admin**.
+
+## Flag
+- After login, the page displayed the admin dashboard.
+- The first word on the webpage returned was **Congratulations**.
+- Retrieved the flag (not published here for HTB rules).
+
+## Lessons Learned
+- Web applications that concatenate user input directly into SQL queries are vulnerable.
+- Special characters (`'`, `--`, `#`) can alter query logic.
+- Always use **prepared statements** and input validation to prevent SQL Injection.
+- Implement WAF or other protective measures to block malicious payloads.
