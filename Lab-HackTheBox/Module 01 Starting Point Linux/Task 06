@@ -1,0 +1,23 @@
+# SEQUEL - HackTheBox Starting Point
+
+## Scan
+- Ran Nmap against the target.
+- Found port **3306/tcp** open.
+- Service identified: **MySQL/MariaDB database service**.
+
+## Access
+- Connected using: `mysql -h <IP> -u root` (with SSL disabled).
+- Successfully accessed the database prompt: `MariaDB [htb]>`.
+- Enumerated tables with: `SHOW TABLES;`.
+- Inspected structure with: `DESCRIBE <table>;`.
+- Retrieved data using: `SELECT * FROM <table>;`.
+
+## Flag
+- Found sensitive information inside the **users** table.
+- Extracted the flag (not published here for HTB rules).
+
+## Lessons Learned
+- Database services exposed directly to the network are vulnerable.
+- Default/root accounts without passwords are a critical risk.
+- Always restrict database access to localhost or trusted hosts.
+- Implement strong authentication and disable anonymous/root remote logins.
