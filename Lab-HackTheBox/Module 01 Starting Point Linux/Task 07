@@ -1,0 +1,37 @@
+# CROCODILE - HackTheBox Starting Point
+
+## Scan
+- Ran Nmap against the target.
+- Found port **21/tcp** open.
+- Service identified: **FTP (File Transfer Protocol)**.
+- Found port **80/tcp** open.
+- Service identified: **HTTP (Web server)**.
+
+## Access
+- Connected using: `ftp <IP>` with anonymous login.
+- Successfully authenticated with user `anonymous` and empty password.
+- Listed directories and files with `ls`.
+- Navigated into available folders and downloaded files using `get <filename>`.
+
+## Gobuster
+- Ran Gobuster against the web service:
+gobuster dir -u http://<IP>/ --wordlist /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -x php,html
+      Uses directory/file enumeration mode.
+      --url : The target URL.
+      --wordlist : Path to the wordlist.
+      -x : File extension(s) to search for.
+- Discovered hidden directories and files.
+- Accessed `/admin` endpoint which revealed sensitive information.
+- Used enumeration to identify valid paths and credentials.
+
+## Flag
+- Located a file containing sensitive information.
+- Retrieved the flag (not published here for HTB rules).
+
+## Lessons Learned
+- FTP services with **anonymous login enabled** expose critical data.
+- Web servers often hide sensitive directories; **Gobuster** is effective for discovery.
+- Always disable anonymous FTP access or restrict it to safe directories.
+- Use secure alternatives like **SFTP/FTPS** instead of plain FTP.
+- Implement proper authentication and monitoring to prevent unauthorized access.
+- Restrict directory listings and protect admin panels with strong credentials.
