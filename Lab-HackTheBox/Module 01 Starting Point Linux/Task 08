@@ -1,0 +1,38 @@
+# RESPONDER - HackTheBox Starting Point
+
+## Scan
+- Ran Nmap against the target.
+- Found port **80/tcp** open.
+- Service identified: **HTTP (Web server)**.
+
+## Access
+- Navigated to the web service in the browser.
+- Observed a parameter vulnerable to **Local File Inclusion (LFI)**.
+- Exploited the LFI to include system files and trigger SMB requests.
+
+## Responder
+- Set up **Responder** tool to listen for incoming SMB/NetBIOS authentication attempts.
+- The vulnerable web application forced the server to connect back, sending NTLM hashes.
+- Captured NTLMv2 hash from the Administrator account.
+- Cracked the hash offline to recover plaintext credentials.
+
+## Privilege Escalation
+- Used the recovered Administrator credentials to authenticate against the target.
+- Gained shell access with elevated privileges.
+
+## Flag
+- Navigated to Administrator’s Desktop:
+cd C:\Users\Administrator\Desktop
+dir
+type root.txt
+
+Code
+- Retrieved the **root flag**.
+
+## Lessons Learned
+- Web applications vulnerable to **LFI** can leak sensitive files and trigger dangerous behaviors.
+- Tools like **Responder** exploit SMB/NetBIOS authentication to capture hashes.
+- Storing or transmitting NTLM hashes without protection is insecure.
+- Always sanitize user input to prevent LFI.
+- Disable unnecessary services like SMB exposure on web servers.
+- Use strong password policies and avoid reusing credentials across services.
